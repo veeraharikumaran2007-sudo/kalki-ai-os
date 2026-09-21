@@ -2599,16 +2599,36 @@ async function sendChatMessage() {
         }
       }
     } catch(e) {
-      if (customKey) {
-        try {
-          fullReply = await streamDirectFromBrowser(queryText, resId, customKey, attachment);
-        } catch(err) {
-          fullReply = 'Connection notice: ' + err.message;
+      // Automatic fallback to standard JSON endpoint /api/chat
+      try {
+        const fallbackResp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: queryText, model: currentModel, history: chatHistory.slice(-20) })
+        });
+        if (fallbackResp.ok) {
+          const fbData = await fallbackResp.json();
+          if (fbData && fbData.reply) {
+            fullReply = fbData.reply;
+            updateAiChatBox(resId, fullReply, fbData.engine || 'Kalki AI');
+          }
+        }
+      } catch(fbErr) {
+        console.warn('Fallback /api/chat error:', fbErr);
+      }
+
+      if (!fullReply.trim()) {
+        if (customKey) {
+          try {
+            fullReply = await streamDirectFromBrowser(queryText, resId, customKey, attachment);
+          } catch(err) {
+            fullReply = 'Connection notice: ' + err.message;
+            updateAiChatBox(resId, fullReply, 'Notice');
+          }
+        } else {
+          fullReply = 'All Kalki neural pipelines are synchronizing. Please send your message again.';
           updateAiChatBox(resId, fullReply, 'Notice');
         }
-      } else {
-        fullReply = 'Gateway notice: Secure AI backend is currently processing or offline. Please retry in a moment or provide your custom API key in Settings.';
-        updateAiChatBox(resId, fullReply, 'Notice');
       }
     }
   }
