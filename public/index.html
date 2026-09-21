@@ -2562,8 +2562,29 @@ async function sendChatMessage() {
       fullReply = 'Notice: ' + (err.message || 'Service busy. Please try again.');
       updateAiChatBox(resId, fullReply, 'Notice');
     }
+  } else if (isHosted) {
+    // On hosted environments (Vercel), SSE streaming is not supported — call /api/chat directly
+    try {
+      updateAiChatBox(resId, 'Thinking...', 'Kalki AI');
+      const resp = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: queryText, model: currentModel, history: chatHistory.slice(-20) })
+      });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const data = await resp.json();
+      if (data && data.reply) {
+        fullReply = data.reply;
+        updateAiChatBox(resId, fullReply, data.engine || 'Kalki AI');
+      } else {
+        throw new Error('Empty response');
+      }
+    } catch(e) {
+      fullReply = 'Service is initializing. Please try again in a moment.';
+      updateAiChatBox(resId, fullReply, 'Notice');
+    }
   } else {
-    // Apple-Grade Security: Always route through secure server gateway /api/chat/stream
+    // Local dev: use SSE streaming /api/chat/stream
     try {
       const resp = await fetch('/api/chat/stream', {
         method: 'POST',
@@ -2599,7 +2620,7 @@ async function sendChatMessage() {
         }
       }
     } catch(e) {
-      // Automatic fallback to standard JSON endpoint /api/chat
+      // Fallback to /api/chat on stream error
       try {
         const fallbackResp = await fetch('/api/chat', {
           method: 'POST',
@@ -2615,20 +2636,6 @@ async function sendChatMessage() {
         }
       } catch(fbErr) {
         console.warn('Fallback /api/chat error:', fbErr);
-      }
-
-      if (!fullReply.trim()) {
-        if (customKey) {
-          try {
-            fullReply = await streamDirectFromBrowser(queryText, resId, customKey, attachment);
-          } catch(err) {
-            fullReply = 'Connection notice: ' + err.message;
-            updateAiChatBox(resId, fullReply, 'Notice');
-          }
-        } else {
-          fullReply = 'All Kalki neural pipelines are synchronizing. Please send your message again.';
-          updateAiChatBox(resId, fullReply, 'Notice');
-        }
       }
     }
   }
