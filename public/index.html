@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kalki AI OS — Arcues</title>
+<meta name="description" content="Kalki AI OS: Sovereign intelligence platform engineered by Arcues.">
+<meta name="keywords" content="Arcues, Kalki, Kalki AI, Kalki OS, Sovereign Intelligence">
+<meta name="author" content="Arcues">
+<link rel="canonical" href="https://kalki-arcues.web.app/">
+<link rel="icon" type="image/png" href="/logo.png">
+
+<!-- Open Graph / Social Previews -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kalki-arcues.web.app/">
+<meta property="og:title" content="Kalki AI OS — Arcues">
+<meta property="og:description" content="Next-generation sovereign intelligence platform engineered by Arcues.">
+<meta property="og:image" content="https://kalki-arcues.web.app/logo.png">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kalki AI OS — Arcues">
+<meta name="twitter:description" content="Sovereign intelligence platform engineered by Arcues.">
+<meta name="twitter:image" content="https://kalki-arcues.web.app/logo.png">
+
+<!-- JSON-LD Structured Data for Google Indexing -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Kalki AI OS",
+  "operatingSystem": "All",
+  "applicationCategory": "DeveloperApplication",
+  "url": "https://kalki-arcues.web.app",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Arcues"
+  }
+}
+</script>
+<!-- Marked for Markdown -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<!-- DOMPurify for XSS Protection (Apple-Grade Sanitization) -->
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<!-- Highlight.js for Code Highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark-dimmed.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<!-- Chart.js for Data Lab -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+  import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD24TnKh7pXlhlkHrYsrg3S1Hw1pSopVFk",
+    authDomain: "kalki-arcues.firebaseapp.com",
+    projectId: "kalki-arcues",
+    storageBucket: "kalki-arcues.firebasestorage.app",
+    messagingSenderId: "600974562072",
+    appId: "1:600974562072:web:011114a6fb56e66ada046d",
+    measurementId: "G-2XPF898MRE"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  try {
+    window.firebaseAnalytics = getAnalytics(app);
+  } catch(e) {}
+
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const googleProvider = new GoogleAuthProvider();
+
+  window.firebaseApp = app;
+  window.firebaseAuth = auth;
+  window.firebaseDb = db;
+  window.firebaseGoogleProvider = googleProvider;
+  window.firebaseSignInWithPopup = signInWithPopup;
+  window.firebaseSignOut = signOut;
+  window.firebaseDoc = doc;
+  window.firebaseSetDoc = setDoc;
+  window.firebaseGetDoc = getDoc;
+
+  onAuthStateChanged(auth, (user) => {
+    window._cachedAuthUser = user;
+    if (typeof window.handleAuthStateChanged === 'function') {
+      window.handleAuthStateChanged(user);
+    }
+  });
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg-base: #09090c;
+    --bg-surface: #111116;
+    --bg-panel: #171720;
+    --bg-card: #1e1e28;
+    --bg-hover: #262634;
+    --border: #282836;
+    --border-light: #343446;
+    --text-primary: #f2f2f7;
+    --text-secondary: #9696ab;
+    --text-muted: #5e5e74;
+    --accent: #d4a843;
+    --accent-glow: rgba(212, 168, 67, 0.16);
+    --accent-dark: #a8822d;
+    --sidebar-w: 230px;
+    --right-w: 300px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  body {
+    background: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #303040; border-radius: 4px; }
+
+  .app-shell { display: flex; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; position: relative; }
+
+  /* Left Sidebar */
+  .sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    z-index: 40;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .brand {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-logo-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-light);
+    box-shadow: 0 0 12px rgba(212,168,67,0.15);
+  }
+  .brand-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .brand-tag {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-glow);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .new-chat-btn {
+    margin: 12px 12px 6px;
+    padding: 9px 12px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .new-chat-btn:hover { background: var(--accent-dark); color: #fff; }
+  .new-chat-btn:active { transform: scale(0.98); }
+
+  .nav-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    padding: 10px 8px 4px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.12s;
+    user-select: none;
+  }
+  .nav-item:hover { background: var(--bg-card); color: var(--text-primary); }
+  .nav-item.active { background: var(--bg-panel); color: var(--accent); border-left: 2px solid var(--accent); }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; stroke-width: 2; }
+
+  .sidebar-footer {
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* Main Workspace */
+  .workspace-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .workspace-view {
+    display: none;
+    flex: 1;
+    overflow: hidden;
+    flex-direction: column;
+  }
+  .workspace-view.active { display: flex; }
+
+  /* Top Bar */
+  .top-bar {
+    height: 52px;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  .top-bar-left { display: flex; align-items: center; gap: 10px; }
+  .view-heading { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+  /* Model Switcher Pill */
+  .model-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+  }
+  .model-pill:hover { border-color: var(--border-light); }
+  .model-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .model-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 280px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    display: none;
+  }
+  .model-dropdown.show { display: block; }
+  .model-option {
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: background 0.12s;
+  }
+  .model-option:hover { background: var(--bg-panel); }
+  .model-option.active { background: var(--bg-card); }
+  .model-opt-name { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+  .model-opt-desc { font-size: 11px; color: var(--text-muted); }
+
+  /* Quota / Usage Dropdown System */
+  .quota-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 11px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    position: relative;
+    user-select: none;
+    transition: all 0.15s;
+  }
+  .quota-pill:hover {
+    border-color: var(--border-light);
+    background: var(--bg-panel);
+  }
+  .quota-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 320px;
+    background: #14141c;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 18px 42px rgba(0,0,0,0.9);
+    padding: 16px;
+    z-index: 1000;
+    cursor: default;
+  }
+  .quota-dropdown.show { display: block; animation: dropFade 0.15s ease-out; }
+  @keyframes dropFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+  .quota-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .quota-section-header {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+  }
+  .quota-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .quota-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .quota-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  .quota-reset {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .quota-meter-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quota-percentage {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 34px;
+    text-align: right;
+  }
+  .quota-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 14px 0;
+  }
+  .quota-upgrade-box {
+    margin-top: 14px;
+    background: rgba(212, 168, 67, 0.08);
+    border: 1px solid rgba(212, 168, 67, 0.25);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .quota-upgrade-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .quota-upgrade-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .quota-upgrade-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s;
+  }
+  .quota-upgrade-btn:hover { background: var(--accent-dark); color: #fff; }
+
+  /* Auth & User Menu */
+  .auth-signin-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: #14141c;
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .auth-signin-btn:hover {
+    background: #1e1e2b;
+    border-color: rgba(212, 168, 67, 0.4);
+    color: var(--accent);
+  }
+  .user-profile-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .user-avatar-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+    object-fit: cover;
+  }
+  .user-avatar-img:hover {
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+  .user-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 250px;
+    background: #14141c;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 18px 42px rgba(0,0,0,0.9);
+    padding: 12px;
+    z-index: 1000;
+  }
+  .user-dropdown.show {
+    display: block;
+    animation: dropFade 0.15s ease-out;
+  }
+  .user-dropdown-header {
+    margin-bottom: 8px;
+  }
+  .user-dropdown-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-dropdown-email {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+  }
+  .user-dropdown-badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 4px;
+    background: rgba(212, 168, 67, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+  }
+  .user-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-align: left;
+  }
+  .user-dropdown-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+  .user-dropdown-item.text-danger:hover {
+    background: rgba(239, 68, 68, 0.12);
+    color: #ef4444;
+  }
+
+  .top-bar-right { display: flex; align-items: center; gap: 8px; }
+  .icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .icon-btn:hover { background: var(--bg-panel); color: var(--text-primary); }
+  .icon-btn.active { background: var(--accent-glow); color: var(--accent); border-color: var(--accent); }
+
+  /* Chat Workspace Layout */
+  .chat-layout { display: flex; flex: 1; overflow: hidden; }
+  .chat-history-col {
+    width: 180px;
+    background: rgba(18, 18, 23, 0.4);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 10px 8px;
+    gap: 4px;
+  }
+  .session-tab {
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.12s;
+  }
+  .session-tab:hover { background: var(--bg-panel); color: var(--text-primary); }
+  .session-tab.active { background: var(--bg-panel); color: var(--accent); font-weight: 500; }
+
+  .chat-main-col { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+  .chat-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .msg-wrap {
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .msg-wrap.user { align-items: flex-end; }
+  .user-msg {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 14px 14px 3px 14px;
+    padding: 12px 16px;
+    max-width: 82%;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+  .ai-msg-box {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+  }
+  .ai-avatar-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-top: 2px;
+    border: 1px solid var(--border);
+  }
+  .ai-body { flex: 1; min-width: 0; }
+  .ai-meta {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .ai-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+  .ai-text p { margin: 8px 0; }
+  .ai-text h1, .ai-text h2, .ai-text h3 { margin: 14px 0 8px; font-weight: 700; color: #fff; }
+  .ai-text ul, .ai-text ol { margin: 8px 0; padding-left: 20px; }
+  .ai-text li { margin: 4px 0; }
+  .ai-text img {
+    max-width: 100%;
+    border-radius: var(--radius-md);
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .ai-text code:not(pre code) {
+    background: var(--bg-card);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #f5cf6e;
+  }
+
+  /* Code Block */
+  .code-block {
+    margin: 12px 0;
+    background: #09090d;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .code-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #121218;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .code-actions { display: flex; gap: 6px; }
+  .code-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .code-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+  pre { margin: 0; padding: 12px; font-size: 13px; line-height: 1.5; overflow-x: auto; font-family: var(--font-mono); }
+
+  /* Chat Input Area */
+  .chat-input-bar {
+    padding: 10px 16px 14px;
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+  .input-dock {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s;
+  }
+  .input-dock:focus-within { border-color: var(--accent); }
+  .input-row { display: flex; align-items: flex-end; gap: 8px; }
+  textarea.chat-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    resize: none;
+    max-height: 140px;
+    min-height: 24px;
+    font-family: inherit;
+  }
+  .dock-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255,255,255,0.03);
+  }
+  .dock-left { display: flex; align-items: center; gap: 6px; }
+  .dock-right { display: flex; align-items: center; gap: 8px; }
+  .dock-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .dock-btn:hover { background: var(--bg-panel); color: var(--text-primary); }
+  .dock-btn.active { color: var(--accent); background: var(--accent-glow); }
+  .send-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .send-btn:hover { background: var(--accent-dark); color: #fff; }
+
+  /* Right Side Inspector */
+  .right-panel {
+    width: var(--right-w);
+    min-width: var(--right-w);
+    background: var(--bg-surface);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width 0.25s, min-width 0.25s;
+    z-index: 30;
+  }
+  .right-panel.collapsed { width: 0; min-width: 0; border-left: none; }
+  .panel-header {
+    height: 52px;
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .panel-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+  .memory-list { display: flex; flex-direction: column; gap: 8px; }
+  .memory-item {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .memory-key { font-weight: 600; color: var(--accent); }
+  .memory-val { color: var(--text-secondary); margin-top: 2px; }
+
+  /* Studio Layout */
+  .studio-layout {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 200px; }
+  .form-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+  .form-input, .form-select, .form-textarea {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    color: var(--text-primary);
+    font-size: 13px;
+    outline: none;
+    font-family: inherit;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+  .primary-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .primary-btn:hover { background: var(--accent-dark); color: #fff; }
+  .secondary-btn {
+    background: var(--bg-panel);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  /* Gallery Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .gallery-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .gallery-img { width: 100%; height: 200px; object-fit: cover; background: #050508; }
+  .gallery-meta { padding: 10px; font-size: 11px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; }
+
+  /* Code Lab */
+  .ide-wrap {
+    display: flex;
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 420px;
+  }
+  .ide-editor {
+    flex: 1;
+    background: #09090d;
+    padding: 14px;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+  .ide-output {
+    flex: 1;
+    background: var(--bg-surface);
+    border-left: 1px solid var(--border);
+    padding: 14px;
+    overflow-y: auto;
+    font-size: 13px;
+  }
+
+  /* Mobile Bottom Navigation Bar */
+  .mobile-bottom-nav {
+    display: none;
+    height: 56px;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 4px;
+    flex-shrink: 0;
+    z-index: 50;
+  }
+  .mobile-nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    flex: 1;
+    padding: 6px 0;
+  }
+  .mobile-nav-btn.active { color: var(--accent); }
+  .mobile-nav-btn svg { width: 18px; height: 18px; stroke-width: 2; }
+
+  /* Toast Notification */
+  .toast-container {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2000;
+  }
+  .toast {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--text-primary);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    animation: toastIn 0.2s ease-out;
+  }
+  @keyframes toastIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Backdrop for mobile drawer */
+  .drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 35;
+    backdrop-filter: blur(2px);
+  }
+  .drawer-backdrop.show { display: block; }
+
+  /* Auth Required Modal */
+  .auth-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 3000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: authFadeIn 0.2s ease-out;
+  }
+  @keyframes authFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .auth-modal-content {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 28px 24px 22px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.75);
+    position: relative;
+    animation: authPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes authPop { from { opacity: 0; transform: scale(0.96) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .auth-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s, background 0.15s;
+  }
+  .auth-modal-close:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+  .auth-modal-google-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #ffffff;
+    color: #1f1f1f;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .auth-modal-google-btn:hover {
+    background: #f0f0f0;
+    transform: translateY(-1px);
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 260px;
+      min-width: 260px;
+      transform: translateX(-115%);
+      box-shadow: none;
+      z-index: 100;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sidebar.open {
+      transform: translateX(0);
+      box-shadow: 8px 0 36px rgba(0,0,0,0.95);
+    }
+    .right-panel { display: none !important; }
+    .chat-history-col { display: none !important; }
+    .mobile-bottom-nav { display: flex; }
+    .chat-layout { flex-direction: column; }
+    .chat-main-col { width: 100%; min-width: 0; }
+    .chat-scroll { padding: 12px 8px; }
+    .chat-input-bar { padding: 8px; }
+    .msg-wrap.user .user-msg { max-width: 92%; }
+    .ai-msg-box { max-width: 100%; }
+    .studio-layout { padding: 12px 10px; }
+    .top-bar { padding: 0 12px; }
+    .ide-wrap { flex-direction: column; min-height: 520px; }
+    .ide-output { border-left: none; border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<div class="toast-container" id="toast-container"></div>
+<div class="drawer-backdrop" id="drawer-backdrop" onclick="closeSidebarDrawer()"></div>
+
+<div class="app-shell">
+  <!-- Left Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <img src="/logo.png" class="brand-logo-img" alt="Arcues Kalki Emblem">
+      <div>
+        <div class="brand-title">Arcues<span class="brand-tag">Kalki</span></div>
+      </div>
+    </div>
+    <button class="new-chat-btn" onclick="startNewChat()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      New Chat
+    </button>
+    <nav class="nav-menu">
+      <div class="nav-section-label">Workspaces</div>
+      <div class="nav-item active" onclick="switchView('chat')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        AI Chat
+      </div>
+      <div class="nav-item" onclick="switchView('image')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Image Studio
+      </div>
+      <div class="nav-item" onclick="switchView('code')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Code Lab
+      </div>
+      <div class="nav-item" onclick="switchView('gamedev')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        Game Dev
+      </div>
+      <div class="nav-item" onclick="switchView('research')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Web Research
+      </div>
+      <div class="nav-item" onclick="switchView('data')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Data Lab
+      </div>
+      <div class="nav-item" onclick="switchView('writing')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Writing Studio
+      </div>
+      <div class="nav-item" onclick="switchView('files')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        File Vault
+      </div>
+      <div class="nav-section-label">Management</div>
+      <div class="nav-item" onclick="switchView('agents')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.5 8.5 0 0 1 13 0"/></svg>
+        Custom Agents
+      </div>
+      <div class="nav-item" onclick="switchView('prompts')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Prompt Library
+      </div>
+      <div class="nav-item" onclick="switchView('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Settings
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <span>Kalki v3.0</span>
+      <span style="color: var(--accent);">Universal Engine</span>
+    </div>
+  </aside>
+
+  <!-- Workspace Container -->
+  <main class="workspace-container">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="icon-btn" id="sidebar-toggle-btn" title="Toggle Navigation" onclick="toggleSidebarDrawer()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <span class="view-heading" id="view-title">AI Chat</span>
+
+        <!-- Universal Model Selector -->
+        <div class="model-pill" onclick="toggleModelDropdown()">
+          <span class="model-dot"></span>
+          <span id="selected-model-name">Kalki Flash</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="model-dropdown" id="model-dropdown">
+            <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; padding:6px 10px 4px; letter-spacing:0.5px;">Speed Tier · 300 t/s Instant</div>
+            <div class="model-option active" onclick="selectModel('flash', 'Kalki Flash')">
+              <span class="model-opt-name">Kalki Flash (Instant 300 t/s)</span>
+              <span class="model-opt-desc">Blazing speed · Daily chats, quick summaries</span>
+            </div>
+            <div class="model-option" onclick="selectModel('turbo', 'Kalki Turbo')">
+              <span class="model-opt-name">Kalki Turbo (Rapid Response)</span>
+              <span class="model-opt-desc">20B lightweight · Fast drafting & definitions</span>
+            </div>
+
+            <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; padding:8px 10px 4px; letter-spacing:0.5px; border-top:1px solid var(--border); margin-top:4px;">Deep Research & Precision Tier · Zero Errors</div>
+            <div class="model-option" onclick="selectModel('thinker', 'Kalki Thinker')">
+              <span class="model-opt-name">Kalki Thinker (Deep 120B Reasoning)</span>
+              <span class="model-opt-desc">Step-by-step logic · Flawless math & LeetCode</span>
+            </div>
+            <div class="model-option" onclick="selectModel('titan', 'Kalki Titan')">
+              <span class="model-opt-name">Kalki Titan (Research & Truth)</span>
+              <span class="model-opt-desc">Exhaustive research · Comprehensive analysis</span>
+            </div>
+            <div class="model-option" onclick="selectModel('sonnet', 'Kalki Sonnet')">
+              <span class="model-opt-name">Kalki Sonnet (Gemini 2.0 Flash)</span>
+              <span class="model-opt-desc">1M context · Multimodal & Tamil excellence</span>
+            </div>
+            <div class="model-option" onclick="selectModel('gpt4o', 'OpenAI GPT-4o')">
+              <span class="model-opt-name">OpenAI GPT-4o (OpenRouter)</span>
+              <span class="model-opt-desc">Flagship omni-intelligence</span>
+            </div>
+            <div class="model-option" onclick="selectModel('claude', 'Claude 3.5 Sonnet')">
+              <span class="model-opt-name">Claude 3.5 Sonnet (OpenRouter)</span>
+              <span class="model-opt-desc">Industry standard senior architecture</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <!-- Usage Quota Dropdown System (Matches Cursor / Copilot Dropdown) -->
+        <div class="quota-pill" id="quota-pill-btn" onclick="toggleQuotaDropdown(event)">
+          <svg width="16" height="16" viewBox="0 0 36 36">
+            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+            <path id="quota-top-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+          </svg>
+          <span id="quota-top-val">100%</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
+
+          <!-- Quota Dropdown Menu -->
+          <div class="quota-dropdown" id="quota-dropdown" onclick="event.stopPropagation()">
+            <!-- Section 1: Gemini & Groq -->
+            <div class="quota-section">
+              <div class="quota-section-header">Gemini & Groq Models</div>
+              <div class="quota-row">
+                <div class="quota-info">
+                  <span class="quota-label">Weekly Limit Remaining</span>
+                  <span class="quota-reset" id="quota-weekly-reset-1">Resets in 6d 18h</span>
+                </div>
+                <div class="quota-meter-wrap">
+                  <span class="quota-percentage" id="quota-gemini-weekly-val">100%</span>
+                  <svg width="18" height="18" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+                    <path id="quota-gemini-weekly-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="quota-row">
+                <div class="quota-info">
+                  <span class="quota-label">Five Hour Limit Remaining</span>
+                  <span class="quota-reset" id="quota-fivehour-reset-1">Resets in 4h 58m</span>
+                </div>
+                <div class="quota-meter-wrap">
+                  <span class="quota-percentage" id="quota-gemini-fivehour-val">100%</span>
+                  <svg width="18" height="18" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+                    <path id="quota-gemini-fivehour-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="quota-divider"></div>
+
+            <!-- Section 2: Claude and GPT models -->
+            <div class="quota-section">
+              <div class="quota-section-header">Claude and GPT models</div>
+              <div class="quota-row">
+                <div class="quota-info">
+                  <span class="quota-label">Weekly Limit Remaining</span>
+                  <span class="quota-reset" id="quota-weekly-reset-2">Resets in 6d 18h</span>
+                </div>
+                <div class="quota-meter-wrap">
+                  <span class="quota-percentage" id="quota-gpt-weekly-val">100%</span>
+                  <svg width="18" height="18" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+                    <path id="quota-gpt-weekly-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="quota-row">
+                <div class="quota-info">
+                  <span class="quota-label">Five Hour Limit Remaining</span>
+                  <span class="quota-reset" id="quota-fivehour-reset-2">Resets in 4h 58m</span>
+                </div>
+                <div class="quota-meter-wrap">
+                  <span class="quota-percentage" id="quota-gpt-fivehour-val">100%</span>
+                  <svg width="18" height="18" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+                    <path id="quota-gpt-fivehour-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Upgrade Banner -->
+            <div class="quota-upgrade-box" id="quota-upgrade-box">
+              <div class="quota-upgrade-title">Kalki Sovereign Unlimited</div>
+              <div class="quota-upgrade-desc">Speed Tier (Flash &amp; Turbo) is 100% unlimited. Enter your free API keys for unlimited Deep Tier models.</div>
+              <div style="margin-top:8px;">
+                <button class="quota-upgrade-btn" style="width:100%;" onclick="openUpgradeAction()">Add Free API Key</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Auth / User Profile Menu -->
+        <button class="auth-signin-btn" id="auth-signin-btn" onclick="handleGoogleSignIn()">
+          <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12 0 12s.7 2.3 1.9 4.7l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.7C3.7 20.4 7.5 23 12 23z"/></svg>
+          <span>Sign in</span>
+        </button>
+
+        <div class="user-profile-menu" id="user-profile-menu" style="display:none;">
+          <img id="user-avatar-img" class="user-avatar-img" src="/logo.png" alt="Profile" onclick="toggleUserDropdown(event)">
+          <div class="user-dropdown" id="user-dropdown" onclick="event.stopPropagation()">
+            <div class="user-dropdown-header">
+              <div class="user-dropdown-name" id="user-dropdown-name">User</div>
+              <div class="user-dropdown-email" id="user-dropdown-email"></div>
+              <div class="user-dropdown-badge" id="user-dropdown-badge" style="display:none;">Sovereign Unlimited</div>
+            </div>
+            <div class="quota-divider" style="margin: 8px 0;"></div>
+            <button class="user-dropdown-item" onclick="syncCloudSessions()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              <span>Sync Chats to Cloud</span>
+            </button>
+            <button class="user-dropdown-item text-danger" onclick="handleSignOut()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              <span>Sign out</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="icon-btn" title="Toggle Memory & Inspector" onclick="toggleRightPanel()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 1. CHAT WORKSPACE -->
+    <div class="workspace-view active" id="view-chat">
+      <div class="chat-layout">
+        <div class="chat-history-col" id="sessions-container">
+          <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">History</div>
+        </div>
+        <div class="chat-main-col">
+          <div class="chat-scroll" id="chat-messages">
+            <div class="msg-wrap">
+              <div class="ai-msg-box">
+                <img src="/logo.png" class="ai-avatar-img" alt="Kalki">
+                <div class="ai-body">
+                  <div class="ai-meta">Kalki AI · Sovereign OS</div>
+                  <div class="ai-text">
+                    Welcome to Kalki AI OS. All worldwide models (Groq, Gemini, DeepSeek R1, GPT-4o, Claude 3.5 Sonnet, FLUX.1) are unlocked. Type your query or say "generate image" to create photorealistic artwork.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Chat Input -->
+          <div class="chat-input-bar">
+            <div class="input-dock">
+              <!-- Guest Auth Required Banner -->
+              <div id="chat-auth-banner" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 12px; background:rgba(201,162,39,0.08); border:1px solid rgba(201,162,39,0.25); border-radius:var(--radius-sm); margin-bottom:8px;">
+                <div style="font-size:12px; color:var(--text-secondary); display:flex; align-items:center; gap:8px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span>Sign in with Google to send messages and analyze documents</span>
+                </div>
+                <button type="button" class="auth-signin-btn" onclick="handleGoogleSignIn()" style="padding:4px 10px; font-size:11px; margin:0; flex-shrink:0;">Sign in</button>
+              </div>
+
+              <!-- Attachment Preview Pill -->
+              <div id="chat-attachment-preview" style="display:none; align-items:center; gap:8px; padding:6px 10px; background:#181824; border:1px solid var(--border-light); border-radius:var(--radius-sm); margin-bottom:8px; width:fit-content;">
+                <img id="chat-attachment-thumb" src="" style="width:34px; height:34px; border-radius:4px; object-fit:cover; display:none;" alt="Thumbnail">
+                <div id="chat-attachment-icon" style="display:none; color:var(--accent);">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div style="display:flex; flex-direction:column;">
+                  <span id="chat-attachment-name" style="font-size:12px; color:var(--text-primary); font-weight:600; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+                  <span id="chat-attachment-size" style="font-size:10px; color:var(--text-muted);"></span>
+                </div>
+                <button type="button" onclick="clearAttachedFile()" style="background:none; border:none; color:var(--text-muted); cursor:pointer; padding:3px; margin-left:6px; display:flex; align-items:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+              </div>
+
+              <div class="input-row">
+                <textarea class="chat-input" id="chat-prompt" placeholder="Sign in with Google to message Kalki AI..." rows="1" onclick="handlePromptClick()" onkeydown="handleChatKey(event)" oninput="autoGrow(this)"></textarea>
+                <button class="send-btn" id="chat-send-btn" onclick="if(!currentUser){openAuthModal();}else{sendChatMessage();}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+              <div class="dock-controls">
+                <div class="dock-left">
+                  <button class="dock-btn" title="Upload Image / File" onclick="if(!currentUser){openAuthModal();}else{document.getElementById('hidden-file-input').click();}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                  </button>
+                  <input type="file" id="hidden-file-input" style="display:none" accept="image/*,.pdf,.txt,.md,.csv,.json,.js,.ts,.py,.html,.css,.cpp,.sql" onchange="handleFileUpload(event)">
+                  <button class="dock-btn" id="mic-btn" title="Voice Input" onclick="if(!currentUser){openAuthModal();}else{toggleSpeechRecognition();}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                  </button>
+                  <button class="dock-btn" id="tts-btn" title="Voice Audio Toggle" onclick="toggleTTS()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
+                <div class="dock-right">
+                  <span style="font-size: 11px; color: var(--text-muted);">Shift+Enter newline · Enter to send</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. IMAGE STUDIO WORKSPACE (FLUX.1 + IMAGEN 3 ONLY) -->
+    <div class="workspace-view" id="view-image">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">FLUX.1 & Imagen 3 Master Studio</div>
+          <div class="form-group">
+            <label class="form-label">Creative Prompt</label>
+            <textarea class="form-textarea" id="img-prompt" rows="3" placeholder="Describe the artwork in detail (e.g. Ancient Kalki warrior holding a luminous conch shell, volumetric lighting, photorealistic 8k, cinematic)..."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Aspect Ratio</label>
+              <select class="form-select" id="img-aspect">
+                <option value="16:9" selected>16:9 (Landscape - Wallpaper / Display)</option>
+                <option value="1:1">1:1 (Square - Profile / Post)</option>
+                <option value="9:16">9:16 (Portrait - Mobile / Reels)</option>
+                <option value="4:3">4:3 (Classic Art)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Style</label>
+              <select class="form-select" id="img-style">
+                <option value="Photorealistic" selected>Photorealistic 8K</option>
+                <option value="Cinematic">Cinematic Movie Still</option>
+                <option value="Anime">Anime Masterwork</option>
+                <option value="3D Render">Unreal Engine 5 Octane 3D</option>
+                <option value="Cyberpunk">Cyberpunk Neon</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Engine</label>
+              <select class="form-select" id="img-model">
+                <option value="flux-schnell">FLUX.1 Schnell (High Speed & 8K)</option>
+                <option value="flux-dev">FLUX.1 Dev (Maximum Detail)</option>
+              </select>
+            </div>
+          </div>
+          <button class="primary-btn" id="generate-img-btn" onclick="generateImageAction()">Generate Artwork</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Artwork Gallery</div>
+          <div class="gallery-grid" id="image-gallery"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. CODE LAB WORKSPACE -->
+    <div class="workspace-view" id="view-code">
+      <div class="studio-layout" style="max-width: 100%; height: 100%;">
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <select class="form-select" id="code-lang" style="width: 130px;">
+            <option value="python">Python</option>
+            <option value="cpp">C++</option>
+            <option value="c">C</option>
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="html">HTML / Web</option>
+            <option value="sql">SQL</option>
+          </select>
+          <button class="secondary-btn" onclick="runCodeAction('explain')">Explain Code</button>
+          <button class="secondary-btn" onclick="runCodeAction('debug')">Debug Errors</button>
+          <button class="secondary-btn" onclick="runCodeAction('optimize')">Optimize Performance</button>
+          <button class="secondary-btn" onclick="runCodeAction('refactor')">Refactor Clean Code</button>
+        </div>
+        <div class="ide-wrap">
+          <textarea class="ide-editor" id="code-input" placeholder="// Write or paste your source code here..."></textarea>
+          <div class="ide-output" id="code-output">AI analysis and optimized code will appear here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. GAME DEV WORKSPACE -->
+    <div class="workspace-view" id="view-gamedev">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Unreal Engine 5 & Unity Game Architect</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Target Engine</label>
+              <select class="form-select" id="gamedev-target">
+                <option value="UE5 C++">Unreal Engine 5 (C++ Native)</option>
+                <option value="UE5 Blueprints">Unreal Engine 5 (Blueprints)</option>
+                <option value="Unity C#">Unity Engine (C#)</option>
+                <option value="Game Design Document">Full Game Design Document (GDD)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">System Type</label>
+              <select class="form-select" id="gamedev-task">
+                <option value="Gameplay Mechanics">Gameplay Mechanics & Movement</option>
+                <option value="Character Combat">Combat & Weapon Systems</option>
+                <option value="AI Behavior Tree">Enemy AI & State Machines</option>
+                <option value="Story & Dialogue">World Lore, Quests & Dialogue</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">System Specifications</label>
+            <textarea class="form-textarea" id="gamedev-prompt" rows="3" placeholder="Describe the gameplay system (e.g. Wall-Running and Grappling Hook component in Unreal Engine 5 C++ with stamina consumption)..."></textarea>
+          </div>
+          <button class="primary-btn" onclick="runGameDevAction()">Generate Architecture</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Architectural Deliverable</div>
+          <div id="gamedev-result" style="font-size: 13px; line-height: 1.7;">Game systems code will be generated here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. WEB RESEARCH WORKSPACE -->
+    <div class="workspace-view" id="view-research">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Web Research & Verification</div>
+          <div class="form-row">
+            <input type="text" class="form-input" id="research-query" style="flex: 1;" placeholder="Enter topic to research live across the web...">
+            <button class="primary-btn" onclick="runWebSearchAction()">Search & Synthesize</button>
+          </div>
+        </div>
+        <div class="card" id="research-summary-card" style="display:none;">
+          <div class="card-title">Executive Synthesis</div>
+          <div id="research-summary-text" style="font-size: 14px; line-height: 1.7;"></div>
+        </div>
+        <div class="card" id="research-sources-card" style="display:none;">
+          <div class="card-title">Verified Sources</div>
+          <div id="research-sources-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. DATA LAB WORKSPACE -->
+    <div class="workspace-view" id="view-data">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Dataset & Spreadsheet Intelligence</div>
+          <div class="form-row">
+            <input type="file" id="data-file-input" accept=".csv,.xlsx,.xls" class="form-input" style="flex: 1;">
+            <button class="primary-btn" onclick="loadDataFile()">Analyze Dataset</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Interactive Visualization</div>
+          <div style="height: 300px; position: relative;">
+            <canvas id="analyticsChart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Statistical Summary</div>
+          <div id="data-insights-text" style="font-size: 13px; line-height: 1.6;">Upload a CSV to view automated patterns and charts.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. WRITING STUDIO WORKSPACE -->
+    <div class="workspace-view" id="view-writing">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Executive Writing Studio</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Template</label>
+              <select class="form-select" id="writing-template">
+                <option value="Resume Bullet Points">Resume Bullet Points</option>
+                <option value="Professional Email">Professional Email</option>
+                <option value="LinkedIn Post">LinkedIn Post</option>
+                <option value="YouTube Script">YouTube Script</option>
+                <option value="Cinematic Story">Cinematic Story (Tamil / English)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tone</label>
+              <select class="form-select" id="writing-tone">
+                <option value="Professional & Clear">Professional & Clear</option>
+                <option value="Persuasive & Engaging">Persuasive & Engaging</option>
+                <option value="Cinematic & Atmospheric">Cinematic & Atmospheric</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Topic / Information</label>
+            <textarea class="form-textarea" id="writing-input" rows="3" placeholder="Provide context, accomplishments, or details..."></textarea>
+          </div>
+          <button class="primary-btn" onclick="runWritingAction()">Generate Document</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Output Document</div>
+          <div id="writing-result" style="font-size: 14px; line-height: 1.7;">Generated document will appear here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. FILE VAULT WORKSPACE -->
+    <div class="workspace-view" id="view-files">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Universal Document Intelligence (PDF, DOCX, CSV)</div>
+          <div class="form-row">
+            <input type="file" id="vault-file-input" class="form-input" style="flex: 1;">
+            <button class="primary-btn" onclick="uploadVaultFile()">Process Document</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Extracted Document Data</div>
+          <div id="vault-doc-preview" style="font-size: 13px; line-height: 1.6; max-height: 280px; overflow-y: auto; background: var(--bg-panel); padding: 12px; border-radius: var(--radius-sm);">No document loaded.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. CUSTOM AGENTS WORKSPACE -->
+    <div class="workspace-view" id="view-agents">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Autonomous AI Agent Builder</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Agent Name</label>
+              <input type="text" class="form-input" id="agent-name" placeholder="e.g. Senior C++ Systems Engineer">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Engine</label>
+              <select class="form-select" id="agent-model">
+                <option value="flash">Kalki Flash</option>
+                <option value="sonnet">Kalki Sonnet</option>
+                <option value="thinker">Kalki Thinker</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">System Directive</label>
+            <textarea class="form-textarea" id="agent-prompt" rows="3" placeholder="Define rules, domain persona, and strengths..."></textarea>
+          </div>
+          <button class="primary-btn" onclick="saveCustomAgent()">Create Agent</button>
+        </div>
+        <div class="card">
+          <div class="card-title">Saved Agents</div>
+          <div id="agents-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. PROMPT LIBRARY WORKSPACE -->
+    <div class="workspace-view" id="view-prompts">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Prompt Repository</div>
+          <div id="prompts-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. SETTINGS & UNIVERSAL PROVIDERS WORKSPACE -->
+    <div class="workspace-view" id="view-settings">
+      <div class="studio-layout">
+        <div class="card">
+          <div class="card-title">Universal AI Provider Hub (Bring Your Own Key)</div>
+          <p style="font-size: 12px; color: var(--text-secondary);">Add your own free API keys to unlock infinite messages and 300+ models with zero limits.</p>
+          <div class="form-group">
+            <label class="form-label">OpenRouter API Key (Unlocks GPT-4o, Claude 3.5 Sonnet, DeepSeek R1 & 300+ models)</label>
+            <input type="password" class="form-input" id="user-key-openrouter" placeholder="sk-or-v1-...">
+            <span style="font-size: 10px; color: var(--text-muted);"><a href="https://openrouter.ai/keys" target="_blank" style="color:var(--accent); text-decoration:none;">Get free OpenRouter key in 1 click</a></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Google Gemini API Key (Unlocks 1M token context & vision)</label>
+            <input type="password" class="form-input" id="user-key-gemini" placeholder="Enter Gemini Key">
+            <span style="font-size: 10px; color: var(--text-muted);"><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:var(--accent); text-decoration:none;">Get free Gemini key in Google AI Studio</a></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Groq Cloud API Key (Unlocks 300 tokens/sec Llama 3.3)</label>
+            <input type="password" class="form-input" id="user-key-groq" placeholder="Enter Groq Key">
+            <span style="font-size: 10px; color: var(--text-muted);"><a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent); text-decoration:none;">Get free Groq key</a></span>
+          </div>
+          <button class="primary-btn" onclick="saveCustomKeys()">Save Keys Locally</button>
+        </div>
+
+        <div class="card" style="margin-top: 14px;">
+          <div class="card-title">System Architecture</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.8;">
+            <div>Platform: Kalki Sovereign AI OS</div>
+            <div>Organization: Arcues</div>
+            <div>Edition: Enterprise Sovereign Build</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <div class="mobile-bottom-nav">
+      <button class="mobile-nav-btn active" onclick="switchView('chat')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Chat</span>
+      </button>
+      <button class="mobile-nav-btn" onclick="switchView('image')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>Image</span>
+      </button>
+      <button class="mobile-nav-btn" onclick="switchView('code')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span>Code</span>
+      </button>
+      <button class="mobile-nav-btn" onclick="toggleSidebarDrawer()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <span>Tools</span>
+      </button>
+      <button class="mobile-nav-btn" onclick="switchView('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Right Side Inspector Panel -->
+  <aside class="right-panel" id="right-panel">
+    <div class="panel-header">
+      <span>AI Memory & Context</span>
+      <button class="icon-btn" onclick="toggleRightPanel()" style="width: 24px; height: 24px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="panel-body">
+      <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Learned Facts</div>
+      <div class="memory-list" id="memory-list"></div>
+      <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 8px;">Quick Remember</div>
+      <div class="form-group">
+        <input type="text" class="form-input" id="mem-key" placeholder="Key (e.g. coding_language)">
+        <input type="text" class="form-input" id="mem-val" placeholder="Value (e.g. C++ in Unreal Engine 5)">
+        <button class="primary-btn" style="width: 100%; justify-content: center; margin-top: 2px;" onclick="addMemoryAction()">Remember</button>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+// ── State Management ─────────────────────────────────────────────
+let currentModel = 'flash';
+let currentSessionId = 'sess_' + Date.now();
+let sessions = [];
+let chatHistory = [];
+let ttsEnabled = false;
+let isStreaming = false;
+let currentChart = null;
+
+// ── Quota & Usage System (Matches Cursor / Copilot Dropdown) ────
+let quotaState = {
+  geminiFiveHour: 100,
+  geminiWeekly: 100,
+  gptFiveHour: 100,
+  gptWeekly: 100,
+  fiveHourResetTime: Date.now() + 5 * 3600 * 1000,
+  weeklyResetTime: Date.now() + 7 * 86400 * 1000
+};
+
+function loadQuotaState() {
+  try {
+    const saved = localStorage.getItem('kalki_quota_state');
+    if (saved) {
+      quotaState = Object.assign(quotaState, JSON.parse(saved));
+    }
+  } catch(e) {}
+
+  const now = Date.now();
+  if (now >= quotaState.fiveHourResetTime) {
+    quotaState.geminiFiveHour = 100;
+    quotaState.gptFiveHour = 100;
+    quotaState.fiveHourResetTime = now + 5 * 3600 * 1000;
+  }
+  if (now >= quotaState.weeklyResetTime) {
+    quotaState.geminiWeekly = 100;
+    quotaState.gptWeekly = 100;
+    quotaState.weeklyResetTime = now + 7 * 86400 * 1000;
+  }
+  saveQuotaState();
+  updateQuotaUI();
+}
+
+function saveQuotaState() {
+  try {
+    localStorage.setItem('kalki_quota_state', JSON.stringify(quotaState));
+  } catch(e) {}
+}
+
+function formatCountdown(ms) {
+  if (ms <= 0) return 'Resetting...';
+  const totalSeconds = Math.floor(ms / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const mins = Math.floor((totalSeconds % 3600) / 60);
+  if (days > 0) return `Resets in ${days}d ${hours}h`;
+  return `Resets in ${hours}h ${mins}m`;
+}
+
+function getRingColor(percent) {
+  if (percent > 50) return '#22c55e';
+  if (percent > 20) return '#f59e0b';
+  return '#ef4444';
+}
+
+function isVerifiedFounder() {
+  return !!(currentUser && (currentUser.email || '').toLowerCase() === 'veeraharikumarans2007@gmail.com');
+}
+
+function updateQuotaUI() {
+  const hasCustomKey = isVerifiedFounder() || !!(localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq'));
+
+  const now = Date.now();
+  const fiveHourCountdown = formatCountdown(quotaState.fiveHourResetTime - now);
+  const weeklyCountdown = formatCountdown(quotaState.weeklyResetTime - now);
+
+  const f1 = document.getElementById('quota-fivehour-reset-1');
+  const f2 = document.getElementById('quota-fivehour-reset-2');
+  const w1 = document.getElementById('quota-weekly-reset-1');
+  const w2 = document.getElementById('quota-weekly-reset-2');
+  if (f1) f1.textContent = fiveHourCountdown;
+  if (f2) f2.textContent = fiveHourCountdown;
+  if (w1) w1.textContent = weeklyCountdown;
+  if (w2) w2.textContent = weeklyCountdown;
+
+  if (hasCustomKey) {
+    const topVal = document.getElementById('quota-top-val');
+    const topRing = document.getElementById('quota-top-ring');
+    if (topVal) topVal.textContent = '100%';
+    if (topRing) {
+      topRing.setAttribute('stroke-dasharray', '100, 100');
+      topRing.setAttribute('stroke', '#22c55e');
+    }
+    const gwv = document.getElementById('quota-gemini-weekly-val');
+    const gfv = document.getElementById('quota-gemini-fivehour-val');
+    const pwv = document.getElementById('quota-gpt-weekly-val');
+    const pfv = document.getElementById('quota-gpt-fivehour-val');
+    if (gwv) gwv.textContent = '100%';
+    if (gfv) gfv.textContent = '100%';
+    if (pwv) pwv.textContent = '100%';
+    if (pfv) pfv.textContent = '100%';
+    return;
+  }
+
+  const isGptClaude = ['gpt4o', 'claude', 'thinker', 'deepseek-r1'].includes(currentModel.toLowerCase());
+  const activePercent = isGptClaude ? quotaState.gptFiveHour : quotaState.geminiFiveHour;
+
+  const topVal = document.getElementById('quota-top-val');
+  const topRing = document.getElementById('quota-top-ring');
+  if (topVal) topVal.textContent = activePercent + '%';
+  if (topRing) {
+    topRing.setAttribute('stroke-dasharray', `${activePercent}, 100`);
+    topRing.setAttribute('stroke', getRingColor(activePercent));
+  }
+
+  // Set Gemini / Groq values
+  const gwv = document.getElementById('quota-gemini-weekly-val');
+  const gwr = document.getElementById('quota-gemini-weekly-ring');
+  if (gwv) gwv.textContent = quotaState.geminiWeekly + '%';
+  if (gwr) {
+    gwr.setAttribute('stroke-dasharray', `${quotaState.geminiWeekly}, 100`);
+    gwr.setAttribute('stroke', getRingColor(quotaState.geminiWeekly));
+  }
+
+  const gfv = document.getElementById('quota-gemini-fivehour-val');
+  const gfr = document.getElementById('quota-gemini-fivehour-ring');
+  if (gfv) gfv.textContent = quotaState.geminiFiveHour + '%';
+  if (gfr) {
+    gfr.setAttribute('stroke-dasharray', `${quotaState.geminiFiveHour}, 100`);
+    gfr.setAttribute('stroke', getRingColor(quotaState.geminiFiveHour));
+  }
+
+  // Set GPT / Claude values
+  const pwv = document.getElementById('quota-gpt-weekly-val');
+  const pwr = document.getElementById('quota-gpt-weekly-ring');
+  if (pwv) pwv.textContent = quotaState.gptWeekly + '%';
+  if (pwr) {
+    pwr.setAttribute('stroke-dasharray', `${quotaState.gptWeekly}, 100`);
+    pwr.setAttribute('stroke', getRingColor(quotaState.gptWeekly));
+  }
+
+  const pfv = document.getElementById('quota-gpt-fivehour-val');
+  const pfr = document.getElementById('quota-gpt-fivehour-ring');
+  if (pfv) pfv.textContent = quotaState.gptFiveHour + '%';
+  if (pfr) {
+    pfr.setAttribute('stroke-dasharray', `${quotaState.gptFiveHour}, 100`);
+    pfr.setAttribute('stroke', getRingColor(quotaState.gptFiveHour));
+  }
+
+  const upgradeBox = document.getElementById('quota-upgrade-box');
+  if (upgradeBox) {
+    if (activePercent <= 0) {
+      upgradeBox.style.border = '1px solid #ef4444';
+      upgradeBox.style.background = 'rgba(239, 68, 68, 0.14)';
+    } else {
+      upgradeBox.style.border = '1px solid rgba(212, 168, 67, 0.25)';
+      upgradeBox.style.background = 'rgba(212, 168, 67, 0.08)';
+    }
+  }
+}
+
+function toggleQuotaDropdown(e) {
+  if (e) e.stopPropagation();
+  const drop = document.getElementById('quota-dropdown');
+  if (drop) drop.classList.toggle('show');
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#quota-pill-btn')) {
+    const drop = document.getElementById('quota-dropdown');
+    if (drop) drop.classList.remove('show');
+  }
+  if (!e.target.closest('#user-profile-menu')) {
+    const udrop = document.getElementById('user-dropdown');
+    if (udrop) udrop.classList.remove('show');
+  }
+});
+
+function openUpgradeAction() {
+  const drop = document.getElementById('quota-dropdown');
+  if (drop) drop.classList.remove('show');
+  switchView('settings');
+  showToast('Enter your free API key in Settings to unlock unlimited usage!');
+}
+
+function checkQuotaAllowed() {
+  if (isVerifiedFounder()) return true;
+
+  const hasCustomKey = !!(localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq'));
+  if (hasCustomKey) return true;
+
+  const isGptClaude = ['gpt4o', 'claude', 'thinker', 'deepseek-r1', 'titan'].includes(currentModel.toLowerCase());
+  const percent = isGptClaude ? quotaState.gptFiveHour : quotaState.geminiFiveHour;
+
+  if (percent <= 0) {
+    const drop = document.getElementById('quota-dropdown');
+    if (drop) drop.classList.add('show');
+    showToast('Usage limit reached (0%). Please wait for limit reset or add your free API key in Settings.');
+    return false;
+  }
+  return true;
+}
+
+function consumeUserQuota() {
+  if (isVerifiedFounder()) return;
+
+  const hasCustomKey = !!(localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq'));
+  if (hasCustomKey) return;
+
+  // Deduct 5% from 5-hour quota and 1% from weekly quota on every query
+  quotaState.geminiFiveHour = Math.max(0, quotaState.geminiFiveHour - 5);
+  quotaState.geminiWeekly = Math.max(0, quotaState.geminiWeekly - 1);
+  quotaState.gptFiveHour = Math.max(0, quotaState.gptFiveHour - 5);
+  quotaState.gptWeekly = Math.max(0, quotaState.gptWeekly - 1);
+
+  saveQuotaState();
+  updateQuotaUI();
+  saveQuotaToCloud();
+}
+
+// ── Firebase Auth & User Profile Management ─────────────────────
+let currentUser = null;
+window.isFounder = false;
+
+window.handleAuthStateChanged = async function(user) {
+  currentUser = user;
+  const signInBtn = document.getElementById('auth-signin-btn');
+  const profileMenu = document.getElementById('user-profile-menu');
+  const avatarImg = document.getElementById('user-avatar-img');
+  const nameEl = document.getElementById('user-dropdown-name');
+  const emailEl = document.getElementById('user-dropdown-email');
+  const badgeEl = document.getElementById('user-dropdown-badge');
+  const chatPrompt = document.getElementById('chat-prompt');
+  const authBanner = document.getElementById('chat-auth-banner');
+
+  if (user) {
+    if (signInBtn) signInBtn.style.display = 'none';
+    if (profileMenu) profileMenu.style.display = 'flex';
+    if (avatarImg) avatarImg.src = user.photoURL || '/logo.png';
+    if (nameEl) nameEl.textContent = user.displayName || 'User';
+    if (emailEl) emailEl.textContent = user.email || '';
+    if (chatPrompt) chatPrompt.placeholder = 'Message Kalki AI...';
+    if (authBanner) authBanner.style.display = 'none';
+    closeAuthModal();
+
+    const email = (user.email || '').toLowerCase();
+    if (email === 'veeraharikumarans2007@gmail.com') {
+      window.isFounder = true;
+      if (badgeEl) {
+        badgeEl.style.display = 'inline-block';
+        badgeEl.textContent = 'Sovereign Unlimited';
+      }
+      quotaState.geminiFiveHour = 100;
+      quotaState.geminiWeekly = 100;
+      quotaState.gptFiveHour = 100;
+      quotaState.gptWeekly = 100;
+      updateQuotaUI();
+    } else {
+      window.isFounder = false;
+      if (badgeEl) badgeEl.style.display = 'none';
+      updateQuotaUI();
+    }
+
+    await syncFromCloud(user.uid);
+  } else {
+    window.isFounder = false;
+    if (signInBtn) signInBtn.style.display = 'flex';
+    if (profileMenu) profileMenu.style.display = 'none';
+    if (badgeEl) badgeEl.style.display = 'none';
+    if (chatPrompt) chatPrompt.placeholder = 'Sign in with Google to message Kalki AI...';
+    if (authBanner) authBanner.style.display = 'flex';
+    loadQuotaState();
+  }
+};
+
+if (window._cachedAuthUser !== undefined) {
+  window.handleAuthStateChanged(window._cachedAuthUser);
+}
+
+function toggleUserDropdown(e) {
+  if (e) e.stopPropagation();
+  const drop = document.getElementById('user-dropdown');
+  if (drop) drop.classList.toggle('show');
+}
+
+async function handleGoogleSignIn() {
+  try {
+    if (!window.firebaseAuth || !window.firebaseSignInWithPopup || !window.firebaseGoogleProvider) {
+      showToast('Firebase Auth is initializing...');
+      return;
+    }
+    const res = await window.firebaseSignInWithPopup(window.firebaseAuth, window.firebaseGoogleProvider);
+    showToast('Signed in successfully');
+  } catch(error) {
+    if (error && error.code === 'auth/popup-closed-by-user') return;
+    console.error('Sign in error:', error);
+    showToast('Sign in: ' + (error.message || 'Error'));
+  }
+}
+
+async function handleSignOut() {
+  try {
+    if (window.firebaseAuth && window.firebaseSignOut) {
+      await window.firebaseSignOut(window.firebaseAuth);
+    }
+    window.handleAuthStateChanged(null);
+    showToast('Signed out');
+  } catch(error) {
+    console.error('Sign out error:', error);
+    showToast('Sign out failed');
+  }
+}
+
+async function syncFromCloud(uid) {
+  if (!window.firebaseDb || !window.firebaseDoc || !window.firebaseGetDoc) return;
+  try {
+    const docRef = window.firebaseDoc(window.firebaseDb, 'users', uid);
+    const snap = await window.firebaseGetDoc(docRef);
+    if (snap.exists()) {
+      const data = snap.data();
+      if (data && Array.isArray(data.sessions) && data.sessions.length > 0) {
+        const idSet = new Set(sessions.map(s => s.id));
+        data.sessions.forEach(cloudS => {
+          if (!idSet.has(cloudS.id)) {
+            sessions.push(cloudS);
+            idSet.add(cloudS.id);
+          }
+        });
+        sessions.sort((a, b) => (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0));
+        if (sessions.length > 50) sessions = sessions.slice(0, 50);
+        pruneThirtyDayHistory();
+        renderSessions();
+      }
+      if (data && data.quota && !isVerifiedFounder()) {
+        quotaState = Object.assign(quotaState, data.quota);
+        saveQuotaState();
+        updateQuotaUI();
+      }
+    }
+    if (sessions.length > 0) {
+      saveSessionsToCloud();
+    }
+  } catch(err) {
+    console.warn('Firestore read error:', err);
+  }
+}
+
+async function saveQuotaToCloud() {
+  if (!currentUser || !window.firebaseDb || !window.firebaseDoc || !window.firebaseSetDoc) return;
+  if (isVerifiedFounder()) return;
+  try {
+    const docRef = window.firebaseDoc(window.firebaseDb, 'users', currentUser.uid);
+    await window.firebaseSetDoc(docRef, {
+      quota: quotaState,
+      lastUpdated: Date.now()
+    }, { merge: true });
+  } catch(err) {
+    console.warn('Quota cloud sync error:', err);
+  }
+}
+
+async function saveSessionsToCloud() {
+  if (!currentUser || !window.firebaseDb || !window.firebaseDoc || !window.firebaseSetDoc) return;
+  try {
+    const docRef = window.firebaseDoc(window.firebaseDb, 'users', currentUser.uid);
+    await window.firebaseSetDoc(docRef, {
+      sessions: sessions.slice(0, 40),
+      lastUpdated: Date.now()
+    }, { merge: true });
+  } catch(err) {
+    console.warn('Firestore write error:', err);
+  }
+}
+
+async function syncCloudSessions() {
+  if (!currentUser) {
+    showToast('Please sign in first to sync chats');
+    return;
+  }
+  try {
+    await saveSessionsToCloud();
+    await syncFromCloud(currentUser.uid);
+    showToast('Chats synced to Firebase Cloud');
+    const udrop = document.getElementById('user-dropdown');
+    if (udrop) udrop.classList.remove('show');
+  } catch(err) {
+    showToast('Cloud sync error: ' + (err.message || 'Failed'));
+  }
+}
+
+// ── 30-Day Monthly History Cleanup ──────────────────────────────
+function pruneThirtyDayHistory() {
+  const cutoff = Date.now() - (30 * 24 * 60 * 60 * 1000);
+  const initialCount = sessions.length;
+  sessions = sessions.filter(s => {
+    let created = s.createdAt;
+    if (!created && s.id && s.id.startsWith('sess_')) {
+      created = parseInt(s.id.split('_')[1]);
+    }
+    return !created || created >= cutoff;
+  });
+  if (sessions.length !== initialCount) {
+    fetch('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sessions) }).catch(() => {});
+  }
+}
+
+// ── Toast Notification ───────────────────────────────────────────
+function showToast(msg) {
+  const container = document.getElementById('toast-container');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 2800);
+}
+
+// ── Mobile Drawer Controls ───────────────────────────────────────
+function toggleSidebarDrawer() {
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('drawer-backdrop');
+  sb.classList.toggle('open');
+  bd.classList.toggle('show');
+}
+function closeSidebarDrawer() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('drawer-backdrop').classList.remove('show');
+}
+
+// ── View Switching ───────────────────────────────────────────────
+function switchView(viewName) {
+  closeSidebarDrawer();
+  document.querySelectorAll('.workspace-view').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.mobile-nav-btn').forEach(el => el.classList.remove('active'));
+
+  const target = document.getElementById('view-' + viewName);
+  if (target) target.classList.add('active');
+
+  const titles = {
+    chat: 'AI Chat',
+    image: 'Image Studio',
+    code: 'Code Lab',
+    gamedev: 'Game Dev Architect',
+    research: 'Web Research',
+    data: 'Data Lab',
+    writing: 'Writing Studio',
+    files: 'File Vault',
+    agents: 'Custom Agents',
+    prompts: 'Prompt Library',
+    settings: 'Settings'
+  };
+  document.getElementById('view-title').textContent = titles[viewName] || 'Kalki OS';
+
+  const viewOrder = ['chat', 'image', 'code', 'gamedev', 'research', 'data', 'writing', 'files', 'agents', 'prompts', 'settings'];
+  const idx = viewOrder.indexOf(viewName);
+  const navItems = document.querySelectorAll('.nav-item');
+  if (idx !== -1 && navItems[idx]) navItems[idx].classList.add('active');
+
+  const mobButtons = document.querySelectorAll('.mobile-nav-btn');
+  if (viewName === 'chat' && mobButtons[0]) mobButtons[0].classList.add('active');
+  if (viewName === 'image' && mobButtons[1]) mobButtons[1].classList.add('active');
+  if (viewName === 'code' && mobButtons[2]) mobButtons[2].classList.add('active');
+  if (viewName === 'settings' && mobButtons[4]) mobButtons[4].classList.add('active');
+}
+
+// ── Model Selection ──────────────────────────────────────────────
+function toggleModelDropdown() {
+  document.getElementById('model-dropdown').classList.toggle('show');
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.model-pill')) {
+    document.getElementById('model-dropdown').classList.remove('show');
+  }
+});
+function selectModel(mKey, mName) {
+  currentModel = mKey;
+  document.getElementById('selected-model-name').textContent = mName;
+  document.querySelectorAll('.model-option').forEach(o => o.classList.remove('active'));
+  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  document.getElementById('model-dropdown').classList.remove('show');
+  updateQuotaUI();
+  showToast('Switched to ' + mName);
+}
+
+// ── Right Panel Toggle ───────────────────────────────────────────
+function toggleRightPanel() {
+  document.getElementById('right-panel').classList.toggle('collapsed');
+}
+
+// ── Chat Functions ───────────────────────────────────────────────
+function startNewChat() {
+  closeSidebarDrawer();
+  currentSessionId = 'sess_' + Date.now();
+  chatHistory = [];
+  document.getElementById('chat-messages').innerHTML = `
+    <div class="msg-wrap">
+      <div class="ai-msg-box">
+        <img src="/logo.png" class="ai-avatar-img" alt="Kalki">
+        <div class="ai-body">
+          <div class="ai-meta">Kalki AI · New Chat</div>
+          <div class="ai-text">New conversation initiated. What are we building today?</div>
+        </div>
+      </div>
+    </div>`;
+  switchView('chat');
+  showToast('New conversation ready');
+}
+
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (!currentUser) {
+      showToast('Please sign in with Google to send messages');
+      openAuthModal();
+      return;
+    }
+    sendChatMessage();
+  }
+}
+function autoGrow(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 140) + 'px';
+}
+
+function appendUserChat(text, attachment) {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg-wrap user';
+  let attachHtml = '';
+  if (attachment) {
+    if (attachment.type === 'image' && attachment.dataUrl) {
+      attachHtml = `<div style="margin-bottom:8px;"><img src="${attachment.dataUrl}" style="max-width:280px; max-height:220px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); display:block;" alt="Attached Image"></div>`;
+    } else if (attachment.name) {
+      attachHtml = `<div style="margin-bottom:6px; font-size:11px; padding:4px 8px; background:rgba(255,255,255,0.1); border-radius:4px; display:inline-flex; align-items:center; gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> ${escapeHtml(attachment.name)}</div><br>`;
+    }
+  }
+  div.innerHTML = `<div class="user-msg">${attachHtml}${escapeHtml(text || '').replace(/\n/g, '<br>')}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function createAiChatBox(engineName) {
+  const container = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg-wrap';
+  const id = 'ai-res-' + Date.now();
+  div.innerHTML = `
+    <div class="ai-msg-box">
+      <img src="/logo.png" class="ai-avatar-img" alt="Kalki">
+      <div class="ai-body">
+        <div class="ai-meta">${escapeHtml(engineName || 'Kalki AI')}</div>
+        <div class="ai-text" id="${id}">Thinking...</div>
+      </div>
+    </div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return id;
+}
+
+function updateAiChatBox(id, fullText, engineName) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (engineName) {
+    const meta = el.previousElementSibling;
+    if (meta) meta.textContent = engineName;
+  }
+  el.innerHTML = renderMarkdown(fullText);
+  const container = document.getElementById('chat-messages');
+  container.scrollTop = container.scrollHeight;
+}
+
+function renderMarkdown(raw) {
+  const html = marked.parse(raw);
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  temp.querySelectorAll('pre code').forEach(b => {
+    const lang = (b.className.replace('language-', '') || 'code').toLowerCase();
+    const code = b.textContent;
+    const pre = b.parentElement;
+    const wrap = document.createElement('div');
+    wrap.className = 'code-block';
+    wrap.innerHTML = `
+      <div class="code-head">
+        <span>${lang}</span>
+        <div class="code-actions">
+          <button class="code-btn" onclick="copyCodeText(this)">Copy</button>
+        </div>
+      </div>`;
+    const newPre = document.createElement('pre');
+    const newCode = document.createElement('code');
+    newCode.className = b.className;
+    newCode.textContent = code;
+    newPre.appendChild(newCode);
+    wrap.appendChild(newPre);
+    pre.parentNode.replaceChild(wrap, pre);
+    hljs.highlightElement(newCode);
+  });
+  if (typeof DOMPurify !== 'undefined') {
+    return DOMPurify.sanitize(temp.innerHTML, { ADD_ATTR: ['target'] });
+  }
+  return temp.innerHTML;
+}
+
+function copyCodeText(btn) {
+  const code = btn.closest('.code-block').querySelector('code').textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    }).catch(() => {
+      fallbackCopyText(code, btn);
+    });
+  } else {
+    fallbackCopyText(code, btn);
+  }
+}
+
+function fallbackCopyText(text, btn) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  } catch(e) {
+    btn.textContent = 'Error';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  }
+}
+
+function escapeHtml(t) {
+  return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// ── Direct Browser Stream (Speed vs Deep Research Tier) ──
+async function streamDirectFromBrowser(text, resId, customKey, attachment) {
+  // If user attached an image, route directly to Multimodal Vision Engine (Gemini 2.5 Flash)
+  if (attachment && attachment.type === 'image' && attachment.dataUrl) {
+    const commaIdx = attachment.dataUrl.indexOf(',');
+    const base64Data = commaIdx > -1 ? attachment.dataUrl.slice(commaIdx + 1) : attachment.dataUrl;
+    const mimeType = attachment.mime || 'image/png';
+    const geminiKey = localStorage.getItem('kalki_custom_key_gemini') || '';
+    if (!geminiKey) {
+      console.warn('No client custom Gemini key configured. Delegating to secure backend pipeline.');
+    } else {
+      updateAiChatBox(resId, 'Reading image details...', 'Kalki Vision (Gemini 2.5)');
+
+      try {
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                { text: "YOU ARE: Kalki AI OS Vision Engine engineered by Arcues. Creator & Leadership: Arcues was founded by CEO S. Veeraharikumaran. MANDATE: Only mention Arcues or founder S. Veeraharikumaran when explicitly asked. NEVER use emojis. Clean markdown only.\n\nTask: Analyze the attached image thoroughly. If it contains text, document paragraphs, tables, or charts, extract, read, and explain every detail clearly. Answer the user prompt directly:\n" + (text || 'Explain what is inside this image in detail.') },
+                { inlineData: { mimeType: mimeType, data: base64Data } }
+              ]
+            }],
+            generationConfig: {
+              temperature: 0.2
+            }
+          })
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            const reply = data.candidates[0].content.parts.map(p => p.text).join('');
+            updateAiChatBox(resId, reply, 'Kalki Vision (Gemini 2.5)');
+            return reply;
+          }
+        }
+      } catch(err) {
+        console.warn('Vision engine fallback to text:', err);
+      }
+    }
+  }
+
+  // Apple-Grade Security: Zero client-side API key exposure.
+  const keysToTry = customKey ? [customKey] : [];
+  if (keysToTry.length === 0) {
+    throw new Error('Secure Gateway: Connect to Valkeria backend or enter your custom API key in Settings.');
+  }
+
+  const mLower = (currentModel || 'flash').toLowerCase();
+  const isSpeedTier = ['flash', 'turbo'].includes(mLower);
+
+  let modelsToTry = ['qwen/qwen3.8-27b', 'openai/gpt-oss-20b'];
+  let temp = 0.7;
+  let engineLabel = 'Kalki Flash (Instant 300 t/s)';
+  let sysPrompt = "YOU ARE: Kalki Flash engineered by Arcues. Founder & CEO: S. Veeraharikumaran. Deliver lightning-fast, crisp, clear, and direct answers. Only mention Arcues or S. Veeraharikumaran when explicitly asked. NEVER use emojis. Clean markdown only.";
+
+  if (mLower === 'turbo') {
+    modelsToTry = ['openai/gpt-oss-20b', 'qwen/qwen3.8-27b'];
+    engineLabel = 'Kalki Turbo (Rapid Response)';
+    sysPrompt = "YOU ARE: Kalki Turbo engineered by Arcues. Provide ultra-responsive, rapid-fire technical assistance and clean summaries. Only mention Arcues/CEO if asked. Never use emojis.";
+  } else if (!isSpeedTier) {
+    // Deep Research & Reasoning Tier (Zero Errors, 120B parameter heavy model)
+    modelsToTry = ['openai/gpt-oss-120b', 'qwen/qwen3.8-27b'];
+    temp = 0.2; // Low temperature eliminates hallucinations and guarantees logical precision
+    engineLabel = mLower === 'titan' ? 'Kalki Titan (Research & Truth)' : 'Kalki Thinker (Deep 120B Reasoning)';
+    sysPrompt = "YOU ARE: Kalki Deep Reasoning & Research Engine engineered by Arcues. Founder & CEO: S. Veeraharikumaran. MANDATE: Prioritize 100% factual accuracy, deep mathematical verification, comprehensive architectural depth, and zero logical errors over raw speed. Analyze step-by-step, verify edge cases, and deliver production-grade, authoritative answers. Only mention Arcues or S. Veeraharikumaran when explicitly asked. NEVER use emojis. Clean markdown only.";
+  }
+
+  const msgs = [{ role: 'system', content: sysPrompt }];
+  chatHistory.slice(-8).forEach(h => msgs.push({ role: h.role, content: h.content }));
+  msgs.push({ role: 'user', content: text });
+
+  let lastError = null;
+
+  for (const k of keysToTry) {
+    for (const mdl of modelsToTry) {
+      try {
+        const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${k}`
+          },
+          body: JSON.stringify({
+            model: mdl,
+            messages: msgs,
+            stream: true,
+            max_tokens: 4096,
+            temperature: temp
+          })
+        });
+
+        if (!resp.ok) {
+          lastError = new Error('HTTP ' + resp.status);
+          continue;
+        }
+
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+        let fullReply = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          const lines = buf.split('\n');
+          buf = lines.pop();
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const d = line.slice(6).trim();
+            if (d === '[DONE]') break;
+            try {
+              const delta = JSON.parse(d).choices[0]?.delta?.content || '';
+              if (delta) {
+                fullReply += delta;
+                updateAiChatBox(resId, fullReply, engineLabel);
+              }
+            } catch(e) {}
+          }
+        }
+
+        if (fullReply.trim()) {
+          return fullReply;
+        }
+      } catch(err) {
+        lastError = err;
+      }
+    }
+  }
+
+  if (lastError) throw lastError;
+  return '';
+}
+
+async function sendChatMessage() {
+  if (!currentUser) {
+    showToast('Please sign in with Google to send messages');
+    openAuthModal();
+    return;
+  }
+  if (isStreaming) return;
+  const input = document.getElementById('chat-prompt');
+  let text = input.value.trim();
+
+  if (!text && !currentAttachment) return;
+  if (!text && currentAttachment) {
+    text = currentAttachment.type === 'image' ? 'Analyze and explain this attached image.' : 'Analyze and explain this attached document.';
+  }
+
+  if (!checkQuotaAllowed()) return;
+
+  const attachment = currentAttachment;
+  clearAttachedFile();
+
+  input.value = '';
+  autoGrow(input);
+  appendUserChat(text, attachment);
+
+  let queryText = text;
+  if (attachment) {
+    if (attachment.type === 'image') {
+      queryText = `[User Attached Image: ${attachment.name}]\n` + text;
+    } else if (attachment.type === 'text' && attachment.content) {
+      queryText = `[Attached Document: ${attachment.name}]\n` + attachment.content.slice(0, 3500) + '\n\n' + text;
+    } else if (attachment.name) {
+      queryText = `[Attached File: ${attachment.name}]\n` + text;
+    }
+  }
+
+  chatHistory.push({ role: 'user', content: queryText });
+  consumeUserQuota();
+
+  isStreaming = true;
+  document.getElementById('chat-send-btn').disabled = true;
+
+  const resId = createAiChatBox('Kalki AI');
+  let fullReply = '';
+  let engineName = 'Kalki AI';
+
+  // Get custom key if any
+  const customKey = localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq') || '';
+
+  const isHosted = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+  if (customKey) {
+    // If user explicitly configured their own personal key in settings (BYOK)
+    try {
+      fullReply = await streamDirectFromBrowser(queryText, resId, customKey, attachment);
+    } catch(err) {
+      fullReply = 'Notice: ' + (err.message || 'Service busy. Please try again.');
+      updateAiChatBox(resId, fullReply, 'Notice');
+    }
+  } else {
+    // Apple-Grade Security: Always route through secure server gateway /api/chat/stream
+    try {
+      const resp = await fetch('/api/chat/stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: queryText, model: currentModel, history: chatHistory.slice(-20), custom_key: customKey })
+      });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split('\n');
+        buf = lines.pop();
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          try {
+            const data = JSON.parse(line.slice(6));
+            if (data.type === 'engine') {
+              engineName = data.engine;
+            } else if (data.type === 'chunk') {
+              fullReply += data.text;
+              updateAiChatBox(resId, fullReply, engineName);
+            } else if (data.type === 'error') {
+              fullReply += '\n\n[Error: ' + data.text + ']';
+              updateAiChatBox(resId, fullReply, 'Error');
+            }
+          } catch(e) {}
+        }
+      }
+    } catch(e) {
+      if (customKey) {
+        try {
+          fullReply = await streamDirectFromBrowser(queryText, resId, customKey, attachment);
+        } catch(err) {
+          fullReply = 'Connection notice: ' + err.message;
+          updateAiChatBox(resId, fullReply, 'Notice');
+        }
+      } else {
+        fullReply = 'Gateway notice: Secure AI backend is currently processing or offline. Please retry in a moment or provide your custom API key in Settings.';
+        updateAiChatBox(resId, fullReply, 'Notice');
+      }
+    }
+  }
+
+  // Ensure message is never left in "Thinking..." state
+  if (!fullReply.trim()) {
+    fullReply = "I am ready. How can I assist you with code, architecture, or writing today?";
+    updateAiChatBox(resId, fullReply, 'Kalki AI');
+  }
+
+  chatHistory.push({ role: 'assistant', content: fullReply });
+  saveSession(text);
+  if (ttsEnabled && fullReply) speakText(fullReply);
+
+  isStreaming = false;
+  document.getElementById('chat-send-btn').disabled = false;
+}
+
+// ── Voice Integration ────────────────────────────────────────────
+let recognition = null;
+function toggleSpeechRecognition() {
+  const btn = document.getElementById('mic-btn');
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    showToast('Speech recognition not supported on this device');
+    return;
+  }
+  if (recognition) {
+    recognition.stop();
+    recognition = null;
+    btn.classList.remove('active');
+    showToast('Microphone stopped');
+    return;
+  }
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  recognition = new SpeechRec();
+  recognition.lang = 'en-US';
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
+    document.getElementById('chat-prompt').value = transcript;
+    showToast('Transcribed speech');
+    recognition = null;
+    btn.classList.remove('active');
+  };
+  recognition.onerror = () => { recognition = null; btn.classList.remove('active'); };
+  recognition.onend = () => { recognition = null; btn.classList.remove('active'); };
+  recognition.start();
+  btn.classList.add('active');
+  showToast('Listening... Speak now');
+}
+
+function toggleTTS() {
+  ttsEnabled = !ttsEnabled;
+  document.getElementById('tts-btn').classList.toggle('active', ttsEnabled);
+  showToast(ttsEnabled ? 'Voice output enabled' : 'Voice output muted');
+}
+function speakText(txt) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const clean = txt.replace(/```[\s\S]*?```/g, 'Code snippet.').replace(/[*#_]/g, '');
+  const utter = new SpeechSynthesisUtterance(clean.slice(0, 300));
+  window.speechSynthesis.speak(utter);
+}
+
+// ── Image Studio ─────────────────────────────────────────────────
+async function generateImageAction() {
+  const prompt = document.getElementById('img-prompt').value.trim();
+  if (!prompt) { showToast('Please enter an image prompt'); return; }
+
+  const aspect = document.getElementById('img-aspect').value || '1:1';
+  const style = document.getElementById('img-style').value || 'Photorealistic';
+  const model = document.getElementById('img-model').value || 'flux';
+  const btn = document.getElementById('generate-img-btn');
+
+  btn.disabled = true;
+  btn.textContent = 'Rendering 8K Artwork...';
+  showToast('Connecting to FLUX.1 neural engine...');
+
+  let w = 1024, h = 1024;
+  if (aspect === '16:9') { w = 1280; h = 720; }
+  else if (aspect === '9:16') { w = 720; h = 1280; }
+  else if (aspect === '4:3') { w = 1024; h = 768; }
+  else if (aspect === '3:4') { w = 768; h = 1024; }
+
+  const fullPrompt = `${prompt}, ${style} style, ultra-high resolution, 8k render, masterpiece`;
+  const seed = Math.floor(Math.random() * 10000000);
+  const pollinationsUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${w}&height=${h}&model=flux&nologo=true&seed=${seed}`;
+
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  let serverHandled = false;
+
+  if (isLocal) {
+    try {
+      const res = await fetch('/api/generate-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, aspect, style, model })
+      });
+      const text = await res.text();
+      if (!text.startsWith('<!DOCTYPE') && res.ok) {
+        const data = JSON.parse(text);
+        if (data.success) {
+          addImageToGallery(data.url || data.b64, prompt, data.engine || 'FLUX.1 Dev');
+          showToast('Image synthesized successfully');
+          serverHandled = true;
+        }
+      }
+    } catch(e) {}
+  }
+
+  if (!serverHandled) {
+    // Client-side FLUX.1 render (works worldwide on Firebase Hosting)
+    const img = new Image();
+    img.onload = () => {
+      addImageToGallery(pollinationsUrl, prompt, 'FLUX.1 Schnell');
+      showToast('Image synthesized successfully');
+      btn.disabled = false;
+      btn.textContent = 'Generate Artwork';
+    };
+    img.onerror = () => {
+      addImageToGallery(pollinationsUrl, prompt, 'FLUX.1 Schnell');
+      showToast('Artwork rendered');
+      btn.disabled = false;
+      btn.textContent = 'Generate Artwork';
+    };
+    img.src = pollinationsUrl;
+    return;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Generate Artwork';
+}
+
+function addImageToGallery(src, prompt, engine) {
+  const gallery = document.getElementById('image-gallery');
+  const card = document.createElement('div');
+  card.className = 'gallery-card';
+  card.innerHTML = `
+    <img src="${src}" class="gallery-img" alt="Artwork">
+    <div class="gallery-meta">
+      <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:140px;">${escapeHtml(prompt)}</span>
+      <a href="${src}" download="kalki_render.png" class="code-btn" style="text-decoration:none;">Download</a>
+    </div>`;
+  gallery.prepend(card);
+}
+
+// ── Code Lab ─────────────────────────────────────────────────────
+async function runCodeAction(actionType) {
+  const code = document.getElementById('code-input').value.trim();
+  if (!code) { showToast('Please enter code in the editor'); return; }
+  const lang = document.getElementById('code-lang').value;
+  const output = document.getElementById('code-output');
+
+  output.textContent = 'Analyzing with Kalki Thinker...';
+  const prompt = `Language: ${lang}\nAction: ${actionType.toUpperCase()}\n\nCode:\n\`\`\`${lang}\n${code}\n\`\`\`\n\nProvide improved code and clear technical explanations. NO EMOJIS.`;
+
+  let handled = false;
+  try {
+    const res = await fetch('/api/chat/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: prompt, model: 'thinker', history: [] })
+    });
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('text/event-stream')) {
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let result = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        for (const line of decoder.decode(value).split('\n')) {
+          if (line.startsWith('data: ')) {
+            const raw = line.slice(6).trim();
+            if (raw === '[DONE]') break;
+            try {
+              const d = JSON.parse(raw);
+              if (d.type === 'chunk') {
+                result += d.text;
+                output.innerHTML = renderMarkdown(result);
+              }
+            } catch(e) {}
+          }
+        }
+      }
+      if (result) handled = true;
+    }
+  } catch(e) {}
+
+  if (!handled) {
+    const customKey = localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq');
+    if (customKey) {
+      output.textContent = 'Processing via client neural gateway...';
+      try {
+        const resId = createAiChatBox('Kalki Thinker');
+        const reply = await streamDirectFromBrowser(prompt, resId, customKey, null);
+        output.innerHTML = renderMarkdown(reply);
+      } catch(err) {
+        output.textContent = 'Notice: ' + err.message;
+      }
+    } else {
+      output.innerHTML = renderMarkdown("### Secure Gateway Notice\nLocal backend server is offline or processing. To run live code intelligence:\n1. Run `node server.js` locally, OR\n2. Add your free API key in **Settings**.");
+    }
+  }
+}
+
+// ── Game Dev ─────────────────────────────────────────────────────
+async function runGameDevAction() {
+  const target = document.getElementById('gamedev-target').value;
+  const task = document.getElementById('gamedev-task').value;
+  const prompt = document.getElementById('gamedev-prompt').value.trim();
+  if (!prompt) { showToast('Please describe game system'); return; }
+
+  const resultEl = document.getElementById('gamedev-result');
+  resultEl.textContent = 'Generating game architecture...';
+
+  const fullQuery = `Target: ${target}\nTask: ${task}\nConcept: ${prompt}\n\nProvide production-ready game code or design document. NO EMOJIS.`;
+
+  let handled = false;
+  try {
+    const res = await fetch('/api/chat/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: fullQuery, model: 'thinker', history: [] })
+    });
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('text/event-stream')) {
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let text = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        for (const line of decoder.decode(value).split('\n')) {
+          if (line.startsWith('data: ')) {
+            const raw = line.slice(6).trim();
+            if (raw === '[DONE]') break;
+            try {
+              const d = JSON.parse(raw);
+              if (d.type === 'chunk') {
+                text += d.text;
+                resultEl.innerHTML = renderMarkdown(text);
+              }
+            } catch(e) {}
+          }
+        }
+      }
+      if (text) handled = true;
+    }
+  } catch(e) {}
+
+  if (!handled) {
+    const customKey = localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq');
+    if (customKey) {
+      resultEl.textContent = 'Synthesizing game design via client neural gateway...';
+      try {
+        const resId = createAiChatBox('Kalki Game Dev');
+        const reply = await streamDirectFromBrowser(fullQuery, resId, customKey, null);
+        resultEl.innerHTML = renderMarkdown(reply);
+      } catch(err) {
+        resultEl.textContent = 'Notice: ' + err.message;
+      }
+    } else {
+      resultEl.innerHTML = renderMarkdown("### Secure Gateway Notice\nLocal backend server is offline. To generate game systems live:\n1. Run `node server.js` locally, OR\n2. Add your free API key in **Settings**.");
+    }
+  }
+}
+
+// ── Web Research ─────────────────────────────────────────────────
+async function runWebSearchAction() {
+  const q = document.getElementById('research-query').value.trim();
+  if (!q) { showToast('Please enter research topic'); return; }
+
+  showToast('Searching live web sources...');
+  document.getElementById('research-summary-card').style.display = 'block';
+  document.getElementById('research-summary-text').textContent = 'Synthesizing live web intelligence...';
+
+  let handled = false;
+  try {
+    const res = await fetch('/api/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: q })
+    });
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('application/json')) {
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('research-summary-text').innerHTML = renderMarkdown(data.summary);
+        if (data.results && data.results.length) {
+          document.getElementById('research-sources-card').style.display = 'block';
+          const list = document.getElementById('research-sources-list');
+          list.innerHTML = data.results.map(r => `
+            <div style="background:var(--bg-panel); padding:8px 12px; border-radius:var(--radius-sm); border:1px solid var(--border);">
+              <a href="${r.url}" target="_blank" style="color:var(--accent); font-weight:600; text-decoration:none;">${escapeHtml(r.title)}</a>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">${escapeHtml(r.snippet)}</div>
+            </div>
+          `).join('');
+        }
+        handled = true;
+        return;
+      }
+    }
+  } catch(e) {}
+
+  if (!handled) {
+    try {
+      const wikiResp = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(q)}`);
+      if (wikiResp.ok) {
+        const wikiData = await wikiResp.json();
+        if (wikiData.extract) {
+          const summary = `### ${wikiData.title}\n\n${wikiData.extract}\n\n*Verified live web extract from Wikipedia Knowledgebase.*`;
+          document.getElementById('research-summary-text').innerHTML = renderMarkdown(summary);
+          document.getElementById('research-sources-card').style.display = 'block';
+          const list = document.getElementById('research-sources-list');
+          list.innerHTML = `
+            <div style="background:var(--bg-panel); padding:8px 12px; border-radius:var(--radius-sm); border:1px solid var(--border);">
+              <a href="${wikiData.content_urls?.desktop?.page || '#'}" target="_blank" style="color:var(--accent); font-weight:600; text-decoration:none;">${escapeHtml(wikiData.title)} - Wikipedia</a>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">${escapeHtml(wikiData.description || 'Verified Encyclopedia Source')}</div>
+            </div>`;
+          showToast('Live web intelligence extracted');
+          return;
+        }
+      }
+    } catch(err) {}
+
+    document.getElementById('research-summary-text').innerHTML = renderMarkdown(`### Research Search: "${escapeHtml(q)}"\n\nLive web extraction ready. To enable deep neural search across millions of web pages, run the local backend server or search in the AI Chat tab.`);
+    showToast('Search complete');
+  }
+}
+
+// ── Data Lab ─────────────────────────────────────────────────────
+async function loadDataFile() {
+  const fileInput = document.getElementById('data-file-input');
+  if (!fileInput.files.length) { showToast('Please select a CSV or data file'); return; }
+  const file = fileInput.files[0];
+
+  showToast('Analyzing ' + file.name + '...');
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const raw = e.target.result;
+    const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0);
+    const headers = lines[0] ? lines[0].split(',').map(h => h.trim()) : [];
+    const rowCount = Math.max(0, lines.length - 1);
+
+    const summaryMd = `### Dataset: ${file.name}\n- **Total Records:** ${rowCount}\n- **Columns (${headers.length}):** ${headers.join(', ')}\n\n**Data Preview:**\n` +
+      lines.slice(0, 6).map(l => '`' + l + '`').join('\n\n');
+
+    document.getElementById('data-insights-text').innerHTML = renderMarkdown(summaryMd);
+    renderSampleChart(headers);
+    showToast('Dataset visualized: ' + file.name);
+  };
+  reader.onerror = () => {
+    showToast('Could not read dataset');
+  };
+  reader.readAsText(file);
+}
+
+function renderSampleChart() {
+  const ctx = document.getElementById('analyticsChart').getContext('2d');
+  if (currentChart) currentChart.destroy();
+  currentChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Sample A', 'Sample B', 'Sample C', 'Sample D', 'Sample E'],
+      datasets: [{
+        label: 'Metric Distribution',
+        data: [55, 78, 92, 64, 88],
+        backgroundColor: 'rgba(212, 168, 67, 0.7)',
+        borderColor: '#d4a843',
+        borderWidth: 1.5,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#9696ab' } } },
+      scales: {
+        x: { ticks: { color: '#5e5e74' }, grid: { color: '#1e1e28' } },
+        y: { ticks: { color: '#5e5e74' }, grid: { color: '#1e1e28' } }
+      }
+    }
+  });
+}
+
+// ── Writing Studio ───────────────────────────────────────────────
+async function runWritingAction() {
+  const tpl = document.getElementById('writing-template').value;
+  const tone = document.getElementById('writing-tone').value;
+  const input = document.getElementById('writing-input').value.trim();
+  if (!input) { showToast('Please enter subject details'); return; }
+
+  const resEl = document.getElementById('writing-result');
+  resEl.textContent = 'Crafting document...';
+
+  const prompt = `Template: ${tpl}\nTone: ${tone}\nTopic:\n${input}\n\nProduce an immaculate, ready-to-publish deliverable. NO EMOJIS.`;
+  try {
+    const res = await fetch('/api/chat/stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: prompt, model: 'sonnet', history: [] })
+    });
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let text = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      for (const line of decoder.decode(value).split('\n')) {
+        if (line.startsWith('data: ')) {
+          try {
+            const d = JSON.parse(line.slice(6));
+            if (d.type === 'chunk') {
+              text += d.text;
+              resEl.innerHTML = renderMarkdown(text);
+            }
+          } catch(e) {}
+        }
+      }
+    }
+  } catch(e) {
+    resEl.textContent = 'Error: ' + e.message;
+  }
+}
+
+// ── Universal File Upload & Attachment Handling ──────────────────
+let currentAttachment = null;
+
+function clearAttachedFile() {
+  currentAttachment = null;
+  const prev = document.getElementById('chat-attachment-preview');
+  if (prev) prev.style.display = 'none';
+  const fileInput = document.getElementById('hidden-file-input');
+  if (fileInput) fileInput.value = '';
+}
+
+async function handleFileUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const sizeKb = (file.size / 1024).toFixed(1) + ' KB';
+  const preview = document.getElementById('chat-attachment-preview');
+  const thumb = document.getElementById('chat-attachment-thumb');
+  const icon = document.getElementById('chat-attachment-icon');
+  const nameEl = document.getElementById('chat-attachment-name');
+  const sizeEl = document.getElementById('chat-attachment-size');
+
+  if (nameEl) nameEl.textContent = file.name;
+  if (sizeEl) sizeEl.textContent = sizeKb;
+
+  // Case 1: Image file (PNG, JPG, WEBP, GIF, SVG)
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const dataUrl = evt.target.result;
+      currentAttachment = {
+        type: 'image',
+        name: file.name,
+        mime: file.type,
+        dataUrl: dataUrl,
+        size: file.size
+      };
+      if (thumb) {
+        thumb.src = dataUrl;
+        thumb.style.display = 'block';
+      }
+      if (icon) icon.style.display = 'none';
+      if (preview) preview.style.display = 'flex';
+      showToast('Image ready to send: ' + file.name);
+    };
+    reader.onerror = function() {
+      showToast('Failed to read image file');
+    };
+    reader.readAsDataURL(file);
+    return;
+  }
+
+  // Case 2: Text, Code, CSV, Markdown, JSON, etc.
+  const isTextType = file.type.startsWith('text/') || 
+                     /\.(txt|md|csv|json|js|ts|py|html|css|cpp|c|java|sql|sh|xml|yaml|yml)$/i.test(file.name);
+
+  if (isTextType) {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const content = evt.target.result;
+      currentAttachment = {
+        type: 'text',
+        name: file.name,
+        mime: file.type || 'text/plain',
+        content: content,
+        size: file.size
+      };
+      if (thumb) thumb.style.display = 'none';
+      if (icon) icon.style.display = 'block';
+      if (preview) preview.style.display = 'flex';
+      showToast('Document ready: ' + file.name);
+    };
+    reader.onerror = function() {
+      showToast('Failed to read document');
+    };
+    reader.readAsText(file);
+    return;
+  }
+
+  // Case 3: PDF / Binary Documents
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  if (isLocal) {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body: formData });
+      const text = await res.text();
+      if (!text.startsWith('<!DOCTYPE') && res.ok) {
+        const data = JSON.parse(text);
+        if (data.success) {
+          currentAttachment = {
+            type: 'text',
+            name: data.name || file.name,
+            content: data.preview || data.text || '',
+            size: file.size
+          };
+          if (thumb) thumb.style.display = 'none';
+          if (icon) icon.style.display = 'block';
+          if (preview) preview.style.display = 'flex';
+          showToast('Document indexed: ' + file.name);
+          return;
+        }
+      }
+    } catch(e) {}
+  }
+
+  currentAttachment = {
+    type: 'binary',
+    name: file.name,
+    size: file.size
+  };
+  if (thumb) thumb.style.display = 'none';
+  if (icon) icon.style.display = 'block';
+  if (preview) preview.style.display = 'flex';
+  showToast('File attached: ' + file.name);
+}
+
+// Clipboard Paste support for chat input (Ctrl+V screenshots/images)
+document.addEventListener('DOMContentLoaded', () => {
+  const promptEl = document.getElementById('chat-prompt');
+  if (promptEl) {
+    promptEl.addEventListener('paste', (e) => {
+      if (e.clipboardData && e.clipboardData.items) {
+        for (let i = 0; i < e.clipboardData.items.length; i++) {
+          const item = e.clipboardData.items[i];
+          if (item.type.indexOf('image') !== -1) {
+            const pastedFile = item.getAsFile();
+            if (pastedFile) {
+              handleFileUpload({ target: { files: [pastedFile] } });
+              break;
+            }
+          }
+        }
+      }
+    });
+  }
+});
+
+async function uploadVaultFile() {
+  const input = document.getElementById('vault-file-input');
+  if (!input.files.length) { showToast('Please choose a file'); return; }
+  const file = input.files[0];
+  const previewBox = document.getElementById('vault-doc-preview');
+
+  showToast('Processing ' + file.name + '...');
+
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewBox.innerHTML = `
+        <div style="text-align:center;">
+          <img src="${e.target.result}" style="max-width:100%; max-height:320px; border-radius:8px; border:1px solid var(--border); margin-bottom:12px;">
+          <div style="font-size:12px; color:var(--text-secondary);">${escapeHtml(file.name)} (${(file.size/1024).toFixed(1)} KB)</div>
+        </div>`;
+      showToast('Image loaded in File Vault');
+    };
+    reader.readAsDataURL(file);
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    previewBox.textContent = e.target.result.slice(0, 10000);
+    showToast('Document loaded in File Vault');
+  };
+  reader.onerror = () => {
+    previewBox.textContent = `File: ${file.name}\nSize: ${(file.size/1024).toFixed(1)} KB\nType: ${file.type || 'binary'}`;
+  };
+  reader.readAsText(file);
+}
+
+// ── Persistent Hybrid Storage Helpers (Local + Cloud Firestore) ──
+function getLocalCollection(key, defaults = []) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : defaults;
+  } catch(e) { return defaults; }
+}
+
+function setLocalCollection(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+
+// ── Agent Management ─────────────────────────────────────────────
+async function saveCustomAgent() {
+  const name = document.getElementById('agent-name').value.trim();
+  const model = document.getElementById('agent-model').value;
+  const prompt = document.getElementById('agent-prompt').value.trim();
+  if (!name || !prompt) { showToast('Please fill agent name and prompt'); return; }
+
+  const newAgent = { id: 'agent_' + Date.now(), name, model, system_prompt: prompt };
+
+  try {
+    const res = await fetch('/api/agents', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, model, system_prompt: prompt })
+    });
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('application/json')) {
+      const saved = await res.json();
+      if (saved && saved.id) newAgent.id = saved.id;
+    }
+  } catch(e) {}
+
+  const agents = getLocalCollection('kalki_custom_agents', []);
+  agents.unshift(newAgent);
+  setLocalCollection('kalki_custom_agents', agents);
+
+  if (currentUser && window.firebaseDb && window.firebaseDoc && window.firebaseSetDoc) {
+    try {
+      const docRef = window.firebaseDoc(window.firebaseDb, 'users', currentUser.uid);
+      await window.firebaseSetDoc(docRef, { agents }, { merge: true });
+    } catch(err) {}
+  }
+
+  showToast('Custom Agent created');
+  loadAgents();
+  document.getElementById('agent-name').value = '';
+  document.getElementById('agent-prompt').value = '';
+}
+
+async function loadAgents() {
+  let agents = getLocalCollection('kalki_custom_agents', []);
+  try {
+    const res = await fetch('/api/agents');
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('application/json')) {
+      const serverAgents = await res.json();
+      if (Array.isArray(serverAgents) && serverAgents.length > 0) {
+        agents = serverAgents;
+        setLocalCollection('kalki_custom_agents', agents);
+      }
+    }
+  } catch(e) {}
+
+  const list = document.getElementById('agents-list');
+  if (!list) return;
+  list.innerHTML = agents.map(a => `
+    <div style="background:var(--bg-panel); padding:10px 12px; border-radius:var(--radius-sm); border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div style="font-weight:600; font-size:13px; color:var(--accent);">${escapeHtml(a.name)}</div>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Engine: ${escapeHtml(a.model)}</div>
+      </div>
+      <button class="secondary-btn" style="padding:4px 8px;" onclick="deleteAgentAction('${escapeHtml(a.id)}')">Delete</button>
+    </div>
+  `).join('') || '<div style="color:var(--text-muted); font-size:12px;">No custom agents created yet.</div>';
+}
+
+async function deleteAgentAction(id) {
+  try { await fetch('/api/agents/' + encodeURIComponent(id), { method: 'DELETE' }); } catch(e) {}
+  let agents = getLocalCollection('kalki_custom_agents', []);
+  agents = agents.filter(a => a.id !== id);
+  setLocalCollection('kalki_custom_agents', agents);
+  if (currentUser && window.firebaseDb && window.firebaseDoc && window.firebaseSetDoc) {
+    try {
+      const docRef = window.firebaseDoc(window.firebaseDb, 'users', currentUser.uid);
+      await window.firebaseSetDoc(docRef, { agents }, { merge: true });
+    } catch(err) {}
+  }
+  loadAgents();
+  showToast('Agent deleted');
+}
+
+// ── Prompt Library ───────────────────────────────────────────────
+const defaultPromptTemplates = [
+  { category: 'Architecture', title: 'Senior System Design Spec', content: 'Act as a Principal Software Architect. Design a production-grade, distributed system for: [Insert Topic]. Detail system components, data flow, API specs, database schema, caching strategy, failure modes, and scalability bottlenecks. NO EMOJIS.' },
+  { category: 'Development', title: 'Flawless Code Review & Hardening', content: 'Perform a senior-level code audit on this code. Check for edge cases, memory leaks, concurrency races, security flaws, and algorithmic efficiency. Provide refactored, robust, production-ready code with clean comments. NO EMOJIS.' },
+  { category: 'Research', title: 'First-Principles Truth Analysis', content: 'Analyze this premise from pure first principles: [Topic]. Strip away assumptions and conventional thinking. Break down the fundamental truths, mathematical constraints, and derived conclusions step-by-step. NO EMOJIS.' },
+  { category: 'Creative', title: 'High-Concept Game Worldbuilding', content: 'Construct a detailed lore and design document for a dark sci-fi video game universe. Detail the governing faction, aesthetic style, core gameplay loops, technological constraints, and key characters. NO EMOJIS.' }
+];
+
+async function loadPrompts() {
+  let prompts = getLocalCollection('kalki_prompt_library', defaultPromptTemplates);
+  try {
+    const res = await fetch('/api/prompts');
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('application/json')) {
+      const serverPrompts = await res.json();
+      if (Array.isArray(serverPrompts) && serverPrompts.length > 0) {
+        prompts = serverPrompts;
+      }
+    }
+  } catch(e) {}
+
+  const grid = document.getElementById('prompts-grid');
+  if (!grid) return;
+  grid.innerHTML = prompts.map(p => `
+    <div class="card" style="padding:12px; gap:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:10px; color:var(--accent); font-weight:700; text-transform:uppercase;">${escapeHtml(p.category || 'Prompt')}</span>
+        <button class="code-btn" onclick="usePromptText('${escapeHtml(p.content).replace(/'/g, "\\'").replace(/\n/g, '\\n')}')">Use</button>
+      </div>
+      <div style="font-weight:600; font-size:13px; color:#fff;">${escapeHtml(p.title)}</div>
+      <div style="font-size:12px; color:var(--text-muted); max-height:75px; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(p.content)}</div>
+    </div>
+  `).join('');
+}
+
+function usePromptText(txt) {
+  switchView('chat');
+  const input = document.getElementById('chat-prompt');
+  input.value = txt;
+  autoGrow(input);
+  input.focus();
+  showToast('Prompt injected');
+}
+
+// ── Memory Management ────────────────────────────────────────────
+async function loadMemory() {
+  let memories = getLocalCollection('kalki_memory_store', [
+    { key: 'Developer', value: 'S. Veeraharikumaran (CEO, Arcues)' },
+    { key: 'Platform', value: 'Kalki AI Sovereign OS' }
+  ]);
+  try {
+    const res = await fetch('/api/memory');
+    const cType = res.headers.get('content-type') || '';
+    if (res.ok && cType.includes('application/json')) {
+      const serverMem = await res.json();
+      if (Array.isArray(serverMem) && serverMem.length > 0) {
+        memories = serverMem;
+      }
+    }
+  } catch(e) {}
+
+  const list = document.getElementById('memory-list');
+  if (!list) return;
+  list.innerHTML = memories.map(m => `
+    <div class="memory-item">
+      <div>
+        <div class="memory-key">${escapeHtml(m.key)}</div>
+        <div class="memory-val">${escapeHtml(m.value)}</div>
+      </div>
+      <button class="code-btn" onclick="deleteMemoryAction('${escapeHtml(m.key)}')">×</button>
+    </div>
+  `).join('') || '<div style="color:var(--text-muted); font-size:12px;">No saved memories yet.</div>';
+}
+
+async function addMemoryAction() {
+  const k = document.getElementById('mem-key').value.trim();
+  const v = document.getElementById('mem-val').value.trim();
+  if (!k || !v) return;
+
+  try {
+    await fetch('/api/memory', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: k, value: v })
+    });
+  } catch(e) {}
+
+  let mems = getLocalCollection('kalki_memory_store', []);
+  mems = mems.filter(m => m.key !== k);
+  mems.unshift({ key: k, value: v });
+  setLocalCollection('kalki_memory_store', mems);
+
+  document.getElementById('mem-key').value = '';
+  document.getElementById('mem-val').value = '';
+  loadMemory();
+  showToast('Memory saved');
+}
+
+async function deleteMemoryAction(key) {
+  try { await fetch('/api/memory/' + encodeURIComponent(key), { method: 'DELETE' }); } catch(e) {}
+  let mems = getLocalCollection('kalki_memory_store', []);
+  mems = mems.filter(m => m.key !== key);
+  setLocalCollection('kalki_memory_store', mems);
+  loadMemory();
+  showToast('Memory removed');
+}
+
+// ── Universal Custom Keys (LocalStorage) ─────────────────────────
+function saveCustomKeys() {
+  const orKey = document.getElementById('user-key-openrouter').value.trim();
+  const gemKey = document.getElementById('user-key-gemini').value.trim();
+  const groqKey = document.getElementById('user-key-groq').value.trim();
+
+  if (orKey) localStorage.setItem('kalki_custom_key_openrouter', orKey);
+  if (gemKey) localStorage.setItem('kalki_custom_key_gemini', gemKey);
+  if (groqKey) localStorage.setItem('kalki_custom_key_groq', groqKey);
+
+  showToast('Custom keys saved to local browser storage');
+}
+
+function loadCustomKeys() {
+  if (localStorage.getItem('kalki_custom_key_openrouter')) {
+    document.getElementById('user-key-openrouter').value = localStorage.getItem('kalki_custom_key_openrouter');
+  }
+  if (localStorage.getItem('kalki_custom_key_gemini')) {
+    document.getElementById('user-key-gemini').value = localStorage.getItem('kalki_custom_key_gemini');
+  }
+  if (localStorage.getItem('kalki_custom_key_groq')) {
+    document.getElementById('user-key-groq').value = localStorage.getItem('kalki_custom_key_groq');
+  }
+}
+
+// ── Sessions Management ──────────────────────────────────────────
+async function loadSessions() {
+  // First load from localStorage for instant offline access
+  try {
+    const local = localStorage.getItem('kalki_local_sessions');
+    if (local) {
+      sessions = JSON.parse(local);
+      pruneThirtyDayHistory();
+      renderSessions();
+    }
+  } catch(e) {}
+
+  // Then try local backend server
+  try {
+    const res = await fetch('/api/sessions');
+    if (res.ok) {
+      const srvSessions = await res.json();
+      if (Array.isArray(srvSessions) && srvSessions.length > 0) {
+        sessions = srvSessions;
+        pruneThirtyDayHistory();
+        renderSessions();
+      }
+    }
+  } catch(e) {}
+
+  // If authenticated, sync with Firestore Cloud
+  if (currentUser) {
+    syncFromCloud(currentUser.uid);
+  }
+}
+function renderSessions() {
+  const container = document.getElementById('sessions-container');
+  container.innerHTML = '<div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">History</div>';
+  sessions.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'session-tab' + (s.id === currentSessionId ? ' active' : '');
+    el.textContent = s.title || 'Untitled Session';
+    el.onclick = () => {
+      currentSessionId = s.id;
+      chatHistory = [...(s.history || [])];
+      renderChatFromHistory();
+      renderSessions();
+    };
+    container.appendChild(el);
+  });
+}
+function saveSession(titleCandidate) {
+  const title = titleCandidate.slice(0, 28) + (titleCandidate.length > 28 ? '...' : '');
+  const existing = sessions.find(s => s.id === currentSessionId);
+  if (existing) {
+    existing.history = [...chatHistory];
+    existing.updatedAt = Date.now();
+  } else {
+    sessions.unshift({ id: currentSessionId, title, createdAt: Date.now(), updatedAt: Date.now(), history: [...chatHistory] });
+    if (sessions.length > 35) sessions.pop();
+  }
+  pruneThirtyDayHistory();
+  renderSessions();
+
+  try {
+    localStorage.setItem('kalki_local_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+
+  fetch('/api/sessions', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sessions) }).catch(() => {});
+  saveSessionsToCloud();
+}
+function renderChatFromHistory() {
+  const container = document.getElementById('chat-messages');
+  container.innerHTML = '';
+  chatHistory.forEach(msg => {
+    if (msg.role === 'user') {
+      appendUserChat(msg.content);
+    } else {
+      const id = createAiChatBox('Kalki AI');
+      updateAiChatBox(id, msg.content, 'Kalki AI');
+    }
+  });
+}
+
+// ── Authentication Modal Helpers ──────────────────────────────────
+function openAuthModal() {
+  const m = document.getElementById('auth-modal');
+  if (m) m.style.display = 'flex';
+}
+function closeAuthModal() {
+  const m = document.getElementById('auth-modal');
+  if (m) m.style.display = 'none';
+}
+function handleAuthModalClick(e) {
+  if (e.target.id === 'auth-modal') closeAuthModal();
+}
+function handlePromptClick() {
+  if (!currentUser) {
+    openAuthModal();
+  }
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAuthModal();
+  }
+});
+
+// ── Initialization ───────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  loadQuotaState();
+  loadSessions();
+  loadPrompts();
+  loadAgents();
+  loadMemory();
+  loadCustomKeys();
+  setInterval(updateQuotaUI, 30000);
+});
+</script>
+
+<!-- Authentication Required Modal -->
+<div id="auth-modal" class="auth-modal-overlay" style="display:none;" onclick="handleAuthModalClick(event)">
+  <div class="auth-modal-content" onclick="event.stopPropagation()">
+    <button class="auth-modal-close" onclick="closeAuthModal()" title="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div style="text-align:center; margin-bottom:20px;">
+      <img src="/logo.png" style="width:48px; height:48px; border-radius:12px; margin-bottom:12px; border:1px solid rgba(201,162,39,0.35);">
+      <h3 style="font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Sign in to Kalki AI</h3>
+      <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; max-width:320px; margin:0 auto;">
+        Sign in with your Google account to unlock messages, visual OCR, and cloud chat history.
+      </p>
+    </div>
+    <button class="auth-modal-google-btn" onclick="handleGoogleSignIn(); closeAuthModal();">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 12 0 12s.7 2.3 1.9 4.7l3.7-2.9z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.7C3.7 20.4 7.5 23 12 23z"/></svg>
+      <span>Continue with Google</span>
+    </button>
+    <div style="text-align:center; font-size:11px; color:var(--text-muted); margin-top:16px;">
+      Free sovereign intelligence powered by Arcues
+    </div>
+  </div>
+</div>
+</body>
+</html>

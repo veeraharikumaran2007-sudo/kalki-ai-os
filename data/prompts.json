@@ -1,0 +1,86 @@
+[
+  {
+    "id": "p1",
+    "title": "Explain Code Step by Step",
+    "content": "Explain this code step by step with line numbers and intuition:\n\n[paste code here]",
+    "category": "Coding",
+    "favorite": false
+  },
+  {
+    "id": "p2",
+    "title": "Debug and Fix Errors",
+    "content": "Analyze this code, identify all logic or syntax bugs, and provide the corrected code with explanation:\n\n[paste code here]",
+    "category": "Coding",
+    "favorite": true
+  },
+  {
+    "id": "p3",
+    "title": "System Design Architecture",
+    "content": "Design a distributed, highly scalable system for [System Name]. Include architecture components, database choice, caching strategy, and bottleneck mitigation.",
+    "category": "Coding",
+    "favorite": false
+  },
+  {
+    "id": "p4",
+    "title": "Unreal Engine 5 C++ Actor",
+    "content": "Write a production-ready Unreal Engine 5 C++ Actor with header (.h) and source (.cpp) files implementing: [Mechanic / Feature]. Include UPROPERTY macros and comments.",
+    "category": "Game Dev",
+    "favorite": true
+  },
+  {
+    "id": "p5",
+    "title": "Full Game Design Document (GDD)",
+    "content": "Generate a comprehensive Game Design Document for a [Genre] game called [Game Title]. Include core loop, mechanics, narrative premise, player progression, and monetization.",
+    "category": "Game Dev",
+    "favorite": false
+  },
+  {
+    "id": "p6",
+    "title": "Executive Resume / CV",
+    "content": "Create an ATS-friendly, high-impact resume section for a Software Engineer with skills in [Skills] and achievements in [Achievements]. Use strong action verbs and quantified impact.",
+    "category": "Writing",
+    "favorite": false
+  },
+  {
+    "id": "p7",
+    "title": "LinkedIn Thought Leadership",
+    "content": "Write a viral, insightful LinkedIn post sharing lessons learned about [Topic]. Include a strong hook, actionable takeaways, and a compelling question to prompt comments.",
+    "category": "Writing",
+    "favorite": false
+  },
+  {
+    "id": "p8",
+    "title": "YouTube Viral Video Script",
+    "content": "Write an engaging 5-minute YouTube video script about [Topic]. Include Hook (0-15s), Intro, 3 Key Points with visual cues, and Call to Action.",
+    "category": "Marketing",
+    "favorite": false
+  },
+  {
+    "id": "p9",
+    "title": "Deep Academic Research Synthesis",
+    "content": "Provide a rigorous, peer-reviewed style research summary on [Topic]. Contrast differing methodologies, summarize empirical consensus, and highlight open research questions.",
+    "category": "Research",
+    "favorite": false
+  },
+  {
+    "id": "p10",
+    "title": "Cinematic Story in Tamil",
+    "content": "Write an atmospheric, emotional short story in pure Tamil about [Theme/Character]. Include vivid sensory descriptions, believable dialogue, and a powerful climax.",
+    "category": "Writing",
+    "favorite": true
+  },
+  {
+    "id": "p11",
+    "title": "FLUX 8K Image Prompt Generator",
+    "content": "Convert this basic idea into a photorealistic FLUX.1 master prompt: [Idea]. Specify lens type, lighting setup, color grade, mood, and micro-details.",
+    "category": "Image",
+    "favorite": false
+  },
+  {
+    "id": "p12",
+    "title": "DSA Problem Optimal Solution",
+    "content": "Solve this LeetCode style problem: [Problem]. Provide brute force intuition, optimal solution with C++ or Python code, and exact Big-O time and space complexity.",
+    "category": "Coding",
+    "favorite": true
+  }
+]
