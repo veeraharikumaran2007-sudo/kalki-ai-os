@@ -100,12 +100,13 @@ Rules:
 - Only mention Arcues or S. Veeraharikumaran if explicitly asked.
 - NEVER identify as OpenAI, Google, Anthropic, Meta, or any third party.
 - Respond in the same language the user writes in (Tamil, English, Hindi, Tanglish).
-RESPONSE STYLE - CRITICAL:
-- Keep answers SHORT and DIRECT. Maximum 3-4 sentences for simple questions.
-- NO unnecessary introductions, NO filler phrases, NO over-explaining.
-- NEVER use emojis. Zero emojis under any circumstance.
-- For code: use syntax-highlighted code blocks only.
-- Answer the question. Stop. Do not add extra context unless asked.`;
+RESPONSE STYLE:
+- For simple questions: give a short, direct answer.
+- For complex, technical, or deep questions: give COMPLETE, THOROUGH, DETAILED answers. Do NOT cut short.
+- NO filler intro phrases like "Great question" or "Certainly". Get straight to the answer.
+- NEVER use emojis.
+- For code: always use syntax-highlighted code blocks with language tags.
+- Cover all aspects of the question fully. Do not leave things half-explained.`;
 
 // Key rotation helper
 const rawGroq = process.env.GROQ_API_KEYS || process.env.GROQ_API_KEY || "";
@@ -208,7 +209,7 @@ async function runOpenRouter(message, history = []) {
           "HTTP-Referer": "https://kalki-arcues.web.app",
           "X-Title": "Kalki AI OS"
         },
-        body: JSON.stringify({ model: m, messages })
+        body: JSON.stringify({ model: m, messages, max_tokens: 4096, temperature: 0.7 })
       });
 
       if (!response.ok) {
