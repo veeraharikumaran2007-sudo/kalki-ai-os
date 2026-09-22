@@ -93,19 +93,19 @@
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg-base: #09090c;
-    --bg-surface: #111116;
-    --bg-panel: #171720;
-    --bg-card: #1e1e28;
-    --bg-hover: #262634;
-    --border: #282836;
-    --border-light: #343446;
-    --text-primary: #f2f2f7;
-    --text-secondary: #9696ab;
-    --text-muted: #5e5e74;
-    --accent: #d4a843;
-    --accent-glow: rgba(212, 168, 67, 0.16);
-    --accent-dark: #a8822d;
+    --bg-base: #000000;
+    --bg-surface: #0a0a0a;
+    --bg-panel: #111111;
+    --bg-card: #1a1a1a;
+    --bg-hover: #222222;
+    --border: #1e1e1e;
+    --border-light: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --text-muted: #444444;
+    --accent: #ffffff;
+    --accent-glow: rgba(255,255,255,0.06);
+    --accent-dark: #cccccc;
     --sidebar-w: 230px;
     --right-w: 300px;
     --radius-sm: 6px;
@@ -128,7 +128,7 @@
   }
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #303040; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
 
   .app-shell { display: flex; width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; position: relative; }
 
@@ -1164,44 +1164,10 @@
         </button>
         <span class="view-heading" id="view-title">AI Chat</span>
 
-        <!-- Universal Model Selector -->
-        <div class="model-pill" onclick="toggleModelDropdown()">
-          <span class="model-dot"></span>
-          <span id="selected-model-name">Kalki Flash</span>
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
-          <div class="model-dropdown" id="model-dropdown">
-            <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; padding:6px 10px 4px; letter-spacing:0.5px;">Speed Tier · 300 t/s Instant</div>
-            <div class="model-option active" onclick="selectModel('flash', 'Kalki Flash')">
-              <span class="model-opt-name">Kalki Flash (Instant 300 t/s)</span>
-              <span class="model-opt-desc">Blazing speed · Daily chats, quick summaries</span>
-            </div>
-            <div class="model-option" onclick="selectModel('turbo', 'Kalki Turbo')">
-              <span class="model-opt-name">Kalki Turbo (Rapid Response)</span>
-              <span class="model-opt-desc">20B lightweight · Fast drafting & definitions</span>
-            </div>
-
-            <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; padding:8px 10px 4px; letter-spacing:0.5px; border-top:1px solid var(--border); margin-top:4px;">Deep Research & Precision Tier · Zero Errors</div>
-            <div class="model-option" onclick="selectModel('thinker', 'Kalki Thinker')">
-              <span class="model-opt-name">Kalki Thinker (Deep 120B Reasoning)</span>
-              <span class="model-opt-desc">Step-by-step logic · Flawless math & LeetCode</span>
-            </div>
-            <div class="model-option" onclick="selectModel('titan', 'Kalki Titan')">
-              <span class="model-opt-name">Kalki Titan (Research & Truth)</span>
-              <span class="model-opt-desc">Exhaustive research · Comprehensive analysis</span>
-            </div>
-            <div class="model-option" onclick="selectModel('sonnet', 'Kalki Sonnet')">
-              <span class="model-opt-name">Kalki Sonnet (Gemini 2.0 Flash)</span>
-              <span class="model-opt-desc">1M context · Multimodal & Tamil excellence</span>
-            </div>
-            <div class="model-option" onclick="selectModel('gpt4o', 'OpenAI GPT-4o')">
-              <span class="model-opt-name">OpenAI GPT-4o (OpenRouter)</span>
-              <span class="model-opt-desc">Flagship omni-intelligence</span>
-            </div>
-            <div class="model-option" onclick="selectModel('claude', 'Claude 3.5 Sonnet')">
-              <span class="model-opt-name">Claude 3.5 Sonnet (OpenRouter)</span>
-              <span class="model-opt-desc">Industry standard senior architecture</span>
-            </div>
-          </div>
+        <!-- Single Model: KALKI GMR 3.4 -->
+        <div class="model-pill" style="cursor:default; pointer-events:none;">
+          <span class="model-dot" style="background:#fff;"></span>
+          <span id="selected-model-name">KALKI GMR 3.4</span>
         </div>
       </div>
       <div class="top-bar-right">
@@ -1337,7 +1303,7 @@
                 <div class="ai-body">
                   <div class="ai-meta">Kalki AI · Sovereign OS</div>
                   <div class="ai-text">
-                    Welcome to Kalki AI OS. All worldwide models (Groq, Gemini, DeepSeek R1, GPT-4o, Claude 3.5 Sonnet, FLUX.1) are unlocked. Type your query or say "generate image" to create photorealistic artwork.
+                    Welcome to Kalki AI OS — powered by KALKI GMR 3.4. How can I help you today?
                   </div>
                 </div>
               </div>
