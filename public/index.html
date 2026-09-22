@@ -1182,77 +1182,41 @@
 
           <!-- Quota Dropdown Menu -->
           <div class="quota-dropdown" id="quota-dropdown" onclick="event.stopPropagation()">
-            <!-- Section 1: Gemini & Groq -->
+            <!-- Unified Section: KALKI GMR 3.4 -->
             <div class="quota-section">
-              <div class="quota-section-header">Gemini & Groq Models</div>
+              <div class="quota-section-header">KALKI GMR 3.4 · Sovereign Limit</div>
               <div class="quota-row">
                 <div class="quota-info">
-                  <span class="quota-label">Weekly Limit Remaining</span>
-                  <span class="quota-reset" id="quota-weekly-reset-1">Resets in 6d 18h</span>
+                  <span class="quota-label">8-Hour Window Remaining</span>
+                  <span class="quota-reset" id="quota-eighthour-reset">Resets in 7h 59m</span>
                 </div>
                 <div class="quota-meter-wrap">
-                  <span class="quota-percentage" id="quota-gemini-weekly-val">100%</span>
+                  <span class="quota-percentage" id="quota-kalki-eighthour-val">100%</span>
                   <svg width="18" height="18" viewBox="0 0 36 36">
                     <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
-                    <path id="quota-gemini-weekly-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                    <path id="quota-kalki-eighthour-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
                   </svg>
                 </div>
               </div>
               <div class="quota-row">
                 <div class="quota-info">
-                  <span class="quota-label">Five Hour Limit Remaining</span>
-                  <span class="quota-reset" id="quota-fivehour-reset-1">Resets in 4h 58m</span>
+                  <span class="quota-label">Weekly Quota Remaining</span>
+                  <span class="quota-reset" id="quota-weekly-reset">Resets in 6d 23h</span>
                 </div>
                 <div class="quota-meter-wrap">
-                  <span class="quota-percentage" id="quota-gemini-fivehour-val">100%</span>
+                  <span class="quota-percentage" id="quota-kalki-weekly-val">100%</span>
                   <svg width="18" height="18" viewBox="0 0 36 36">
                     <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
-                    <path id="quota-gemini-fivehour-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+                    <path id="quota-kalki-weekly-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
                   </svg>
                 </div>
               </div>
             </div>
 
-            <div class="quota-divider"></div>
-
-            <!-- Section 2: Claude and GPT models -->
-            <div class="quota-section">
-              <div class="quota-section-header">Claude and GPT models</div>
-              <div class="quota-row">
-                <div class="quota-info">
-                  <span class="quota-label">Weekly Limit Remaining</span>
-                  <span class="quota-reset" id="quota-weekly-reset-2">Resets in 6d 18h</span>
-                </div>
-                <div class="quota-meter-wrap">
-                  <span class="quota-percentage" id="quota-gpt-weekly-val">100%</span>
-                  <svg width="18" height="18" viewBox="0 0 36 36">
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
-                    <path id="quota-gpt-weekly-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
-                  </svg>
-                </div>
-              </div>
-              <div class="quota-row">
-                <div class="quota-info">
-                  <span class="quota-label">Five Hour Limit Remaining</span>
-                  <span class="quota-reset" id="quota-fivehour-reset-2">Resets in 4h 58m</span>
-                </div>
-                <div class="quota-meter-wrap">
-                  <span class="quota-percentage" id="quota-gpt-fivehour-val">100%</span>
-                  <svg width="18" height="18" viewBox="0 0 36 36">
-                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
-                    <path id="quota-gpt-fivehour-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- Upgrade Banner -->
-            <div class="quota-upgrade-box" id="quota-upgrade-box">
-              <div class="quota-upgrade-title">Kalki Sovereign Unlimited</div>
-              <div class="quota-upgrade-desc">Speed Tier (Flash &amp; Turbo) is 100% unlimited. Enter your free API keys for unlimited Deep Tier models.</div>
-              <div style="margin-top:8px;">
-                <button class="quota-upgrade-btn" style="width:100%;" onclick="openUpgradeAction()">Add Free API Key</button>
-              </div>
+            <!-- Status Banner -->
+            <div class="quota-upgrade-box" id="quota-upgrade-box" style="border: 1px solid var(--border-light); background: var(--bg-card);">
+              <div class="quota-upgrade-title" style="color:#ffffff;">KALKI Autonomous Quota</div>
+              <div class="quota-upgrade-desc" style="color:var(--text-secondary);">Your AI pipeline automatically refreshes every 8 hours for continuous enterprise performance.</div>
             </div>
           </div>
         </div>
@@ -1708,11 +1672,9 @@ let currentChart = null;
 
 // ── Quota & Usage System (Matches Cursor / Copilot Dropdown) ────
 let quotaState = {
-  geminiFiveHour: 100,
-  geminiWeekly: 100,
-  gptFiveHour: 100,
-  gptWeekly: 100,
-  fiveHourResetTime: Date.now() + 5 * 3600 * 1000,
+  kalkiEightHour: 100,
+  kalkiWeekly: 100,
+  eightHourResetTime: Date.now() + 8 * 3600 * 1000,
   weeklyResetTime: Date.now() + 7 * 86400 * 1000
 };
 
@@ -1720,19 +1682,27 @@ function loadQuotaState() {
   try {
     const saved = localStorage.getItem('kalki_quota_state');
     if (saved) {
-      quotaState = Object.assign(quotaState, JSON.parse(saved));
+      const parsed = JSON.parse(saved);
+      if (parsed.geminiFiveHour !== undefined && parsed.kalkiEightHour === undefined) {
+        parsed.kalkiEightHour = parsed.geminiFiveHour;
+      }
+      if (parsed.geminiWeekly !== undefined && parsed.kalkiWeekly === undefined) {
+        parsed.kalkiWeekly = parsed.geminiWeekly;
+      }
+      if (parsed.fiveHourResetTime !== undefined && parsed.eightHourResetTime === undefined) {
+        parsed.eightHourResetTime = parsed.fiveHourResetTime;
+      }
+      quotaState = Object.assign(quotaState, parsed);
     }
   } catch(e) {}
 
   const now = Date.now();
-  if (now >= quotaState.fiveHourResetTime) {
-    quotaState.geminiFiveHour = 100;
-    quotaState.gptFiveHour = 100;
-    quotaState.fiveHourResetTime = now + 5 * 3600 * 1000;
+  if (now >= quotaState.eightHourResetTime) {
+    quotaState.kalkiEightHour = 100;
+    quotaState.eightHourResetTime = now + 8 * 3600 * 1000;
   }
   if (now >= quotaState.weeklyResetTime) {
-    quotaState.geminiWeekly = 100;
-    quotaState.gptWeekly = 100;
+    quotaState.kalkiWeekly = 100;
     quotaState.weeklyResetTime = now + 7 * 86400 * 1000;
   }
   saveQuotaState();
@@ -1756,104 +1726,99 @@ function formatCountdown(ms) {
 }
 
 function getRingColor(percent) {
-  if (percent > 50) return '#22c55e';
-  if (percent > 20) return '#f59e0b';
+  if (percent > 50) return '#ffffff';
+  if (percent > 20) return '#888888';
   return '#ef4444';
 }
 
+// Secure founder check without storing plain email in client source
+async function checkFounderStatus(user) {
+  if (!user || !user.email) return false;
+  try {
+    const res = await fetch('/api/auth/verify-founder', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: user.email })
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return !!data.isFounder;
+    }
+  } catch(e) {}
+  return false;
+}
+
 function isVerifiedFounder() {
-  return !!(currentUser && (currentUser.email || '').toLowerCase() === 'veeraharikumarans2007@gmail.com');
+  return !!window._kalki_verified_founder;
+}
+
+function getStoredKey(keyName) {
+  try {
+    const s = sessionStorage.getItem(keyName);
+    if (s) return decodeURIComponent(atob(s));
+  } catch(e) {}
+  try {
+    const l = localStorage.getItem(keyName);
+    if (l) return l;
+  } catch(e) {}
+  return '';
+}
+
+function hasUserCustomKey() {
+  return !!(getStoredKey('kalki_custom_key_openrouter') || getStoredKey('kalki_custom_key_gemini') || getStoredKey('kalki_custom_key_groq'));
 }
 
 function updateQuotaUI() {
-  const hasCustomKey = isVerifiedFounder() || !!(localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq'));
+  const hasCustomKey = isVerifiedFounder() || hasUserCustomKey();
 
   const now = Date.now();
-  const fiveHourCountdown = formatCountdown(quotaState.fiveHourResetTime - now);
+  const eightHourCountdown = formatCountdown(quotaState.eightHourResetTime - now);
   const weeklyCountdown = formatCountdown(quotaState.weeklyResetTime - now);
 
-  const f1 = document.getElementById('quota-fivehour-reset-1');
-  const f2 = document.getElementById('quota-fivehour-reset-2');
-  const w1 = document.getElementById('quota-weekly-reset-1');
-  const w2 = document.getElementById('quota-weekly-reset-2');
-  if (f1) f1.textContent = fiveHourCountdown;
-  if (f2) f2.textContent = fiveHourCountdown;
-  if (w1) w1.textContent = weeklyCountdown;
-  if (w2) w2.textContent = weeklyCountdown;
+  const eh = document.getElementById('quota-eighthour-reset');
+  const wk = document.getElementById('quota-weekly-reset');
+  if (eh) eh.textContent = eightHourCountdown;
+  if (wk) wk.textContent = weeklyCountdown;
 
-  if (hasCustomKey) {
-    const topVal = document.getElementById('quota-top-val');
-    const topRing = document.getElementById('quota-top-ring');
-    if (topVal) topVal.textContent = '100%';
-    if (topRing) {
-      topRing.setAttribute('stroke-dasharray', '100, 100');
-      topRing.setAttribute('stroke', '#22c55e');
-    }
-    const gwv = document.getElementById('quota-gemini-weekly-val');
-    const gfv = document.getElementById('quota-gemini-fivehour-val');
-    const pwv = document.getElementById('quota-gpt-weekly-val');
-    const pfv = document.getElementById('quota-gpt-fivehour-val');
-    if (gwv) gwv.textContent = '100%';
-    if (gfv) gfv.textContent = '100%';
-    if (pwv) pwv.textContent = '100%';
-    if (pfv) pfv.textContent = '100%';
-    return;
-  }
-
-  const isGptClaude = ['gpt4o', 'claude', 'thinker', 'deepseek-r1'].includes(currentModel.toLowerCase());
-  const activePercent = isGptClaude ? quotaState.gptFiveHour : quotaState.geminiFiveHour;
+  const activePercent = quotaState.kalkiEightHour !== undefined ? quotaState.kalkiEightHour : 100;
 
   const topVal = document.getElementById('quota-top-val');
   const topRing = document.getElementById('quota-top-ring');
+
+  if (hasCustomKey) {
+    if (topVal) topVal.textContent = '100%';
+    if (topRing) {
+      topRing.setAttribute('stroke-dasharray', '100, 100');
+      topRing.setAttribute('stroke', '#ffffff');
+    }
+    const ehVal = document.getElementById('quota-kalki-eighthour-val');
+    const wkVal = document.getElementById('quota-kalki-weekly-val');
+    if (ehVal) ehVal.textContent = '100%';
+    if (wkVal) wkVal.textContent = '100%';
+    return;
+  }
+
   if (topVal) topVal.textContent = activePercent + '%';
   if (topRing) {
     topRing.setAttribute('stroke-dasharray', `${activePercent}, 100`);
     topRing.setAttribute('stroke', getRingColor(activePercent));
   }
 
-  // Set Gemini / Groq values
-  const gwv = document.getElementById('quota-gemini-weekly-val');
-  const gwr = document.getElementById('quota-gemini-weekly-ring');
-  if (gwv) gwv.textContent = quotaState.geminiWeekly + '%';
-  if (gwr) {
-    gwr.setAttribute('stroke-dasharray', `${quotaState.geminiWeekly}, 100`);
-    gwr.setAttribute('stroke', getRingColor(quotaState.geminiWeekly));
+  const ehVal = document.getElementById('quota-kalki-eighthour-val');
+  const ehRing = document.getElementById('quota-kalki-eighthour-ring');
+  if (ehVal) ehVal.textContent = activePercent + '%';
+  if (ehRing) {
+    ehRing.setAttribute('stroke-dasharray', `${activePercent}, 100`);
+    ehRing.setAttribute('stroke', getRingColor(activePercent));
   }
 
-  const gfv = document.getElementById('quota-gemini-fivehour-val');
-  const gfr = document.getElementById('quota-gemini-fivehour-ring');
-  if (gfv) gfv.textContent = quotaState.geminiFiveHour + '%';
-  if (gfr) {
-    gfr.setAttribute('stroke-dasharray', `${quotaState.geminiFiveHour}, 100`);
-    gfr.setAttribute('stroke', getRingColor(quotaState.geminiFiveHour));
-  }
-
-  // Set GPT / Claude values
-  const pwv = document.getElementById('quota-gpt-weekly-val');
-  const pwr = document.getElementById('quota-gpt-weekly-ring');
-  if (pwv) pwv.textContent = quotaState.gptWeekly + '%';
-  if (pwr) {
-    pwr.setAttribute('stroke-dasharray', `${quotaState.gptWeekly}, 100`);
-    pwr.setAttribute('stroke', getRingColor(quotaState.gptWeekly));
-  }
-
-  const pfv = document.getElementById('quota-gpt-fivehour-val');
-  const pfr = document.getElementById('quota-gpt-fivehour-ring');
-  if (pfv) pfv.textContent = quotaState.gptFiveHour + '%';
-  if (pfr) {
-    pfr.setAttribute('stroke-dasharray', `${quotaState.gptFiveHour}, 100`);
-    pfr.setAttribute('stroke', getRingColor(quotaState.gptFiveHour));
-  }
-
-  const upgradeBox = document.getElementById('quota-upgrade-box');
-  if (upgradeBox) {
-    if (activePercent <= 0) {
-      upgradeBox.style.border = '1px solid #ef4444';
-      upgradeBox.style.background = 'rgba(239, 68, 68, 0.14)';
-    } else {
-      upgradeBox.style.border = '1px solid rgba(212, 168, 67, 0.25)';
-      upgradeBox.style.background = 'rgba(212, 168, 67, 0.08)';
-    }
+  const wkVal = document.getElementById('quota-kalki-weekly-val');
+  const wkRing = document.getElementById('quota-kalki-weekly-ring');
+  const wkPercent = quotaState.kalkiWeekly !== undefined ? quotaState.kalkiWeekly : 100;
+  if (wkVal) wkVal.textContent = wkPercent + '%';
+  if (wkRing) {
+    wkRing.setAttribute('stroke-dasharray', `${wkPercent}, 100`);
+    wkRing.setAttribute('stroke', getRingColor(wkPercent));
   }
 }
 
@@ -1877,38 +1842,28 @@ function openUpgradeAction() {
   const drop = document.getElementById('quota-dropdown');
   if (drop) drop.classList.remove('show');
   switchView('settings');
-  showToast('Enter your free API key in Settings to unlock unlimited usage!');
+  showToast('Enter your personal API key in Settings for unlimited quota.');
 }
 
 function checkQuotaAllowed() {
-  if (isVerifiedFounder()) return true;
+  if (isVerifiedFounder() || hasUserCustomKey()) return true;
 
-  const hasCustomKey = !!(localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq'));
-  if (hasCustomKey) return true;
-
-  const isGptClaude = ['gpt4o', 'claude', 'thinker', 'deepseek-r1', 'titan'].includes(currentModel.toLowerCase());
-  const percent = isGptClaude ? quotaState.gptFiveHour : quotaState.geminiFiveHour;
+  const percent = quotaState.kalkiEightHour !== undefined ? quotaState.kalkiEightHour : 100;
 
   if (percent <= 0) {
     const drop = document.getElementById('quota-dropdown');
     if (drop) drop.classList.add('show');
-    showToast('Usage limit reached (0%). Please wait for limit reset or add your free API key in Settings.');
+    showToast('8-hour usage limit reached. Resets automatically or add API key in Settings.');
     return false;
   }
   return true;
 }
 
 function consumeUserQuota() {
-  if (isVerifiedFounder()) return;
+  if (isVerifiedFounder() || hasUserCustomKey()) return;
 
-  const hasCustomKey = !!(localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq'));
-  if (hasCustomKey) return;
-
-  // Deduct 5% from 5-hour quota and 1% from weekly quota on every query
-  quotaState.geminiFiveHour = Math.max(0, quotaState.geminiFiveHour - 5);
-  quotaState.geminiWeekly = Math.max(0, quotaState.geminiWeekly - 1);
-  quotaState.gptFiveHour = Math.max(0, quotaState.gptFiveHour - 5);
-  quotaState.gptWeekly = Math.max(0, quotaState.gptWeekly - 1);
+  quotaState.kalkiEightHour = Math.max(0, (quotaState.kalkiEightHour !== undefined ? quotaState.kalkiEightHour : 100) - 4);
+  quotaState.kalkiWeekly = Math.max(0, (quotaState.kalkiWeekly !== undefined ? quotaState.kalkiWeekly : 100) - 1);
 
   saveQuotaState();
   updateQuotaUI();
@@ -1940,20 +1895,18 @@ window.handleAuthStateChanged = async function(user) {
     if (authBanner) authBanner.style.display = 'none';
     closeAuthModal();
 
-    const email = (user.email || '').toLowerCase();
-    if (email === 'veeraharikumarans2007@gmail.com') {
-      window.isFounder = true;
+    const isFounder = await checkFounderStatus(user);
+    window._kalki_verified_founder = isFounder;
+    window.isFounder = isFounder;
+    if (isFounder) {
       if (badgeEl) {
         badgeEl.style.display = 'inline-block';
         badgeEl.textContent = 'Sovereign Unlimited';
       }
-      quotaState.geminiFiveHour = 100;
-      quotaState.geminiWeekly = 100;
-      quotaState.gptFiveHour = 100;
-      quotaState.gptWeekly = 100;
+      quotaState.kalkiEightHour = 100;
+      quotaState.kalkiWeekly = 100;
       updateQuotaUI();
     } else {
-      window.isFounder = false;
       if (badgeEl) badgeEl.style.display = 'none';
       updateQuotaUI();
     }
@@ -2341,7 +2294,7 @@ async function streamDirectFromBrowser(text, resId, customKey, attachment) {
     const commaIdx = attachment.dataUrl.indexOf(',');
     const base64Data = commaIdx > -1 ? attachment.dataUrl.slice(commaIdx + 1) : attachment.dataUrl;
     const mimeType = attachment.mime || 'image/png';
-    const geminiKey = localStorage.getItem('kalki_custom_key_gemini') || '';
+    const geminiKey = getStoredKey('kalki_custom_key_gemini');
     if (!geminiKey) {
       console.warn('No client custom Gemini key configured. Delegating to secure backend pipeline.');
     } else {
@@ -2516,8 +2469,8 @@ async function sendChatMessage() {
   let fullReply = '';
   let engineName = 'Kalki AI';
 
-  // Get custom key if any
-  const customKey = localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq') || '';
+  // Get custom key if any (secure session storage)
+  const customKey = getStoredKey('kalki_custom_key_openrouter') || getStoredKey('kalki_custom_key_gemini') || getStoredKey('kalki_custom_key_groq') || '';
 
   const isHosted = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
   if (customKey) {
@@ -2793,7 +2746,7 @@ async function runCodeAction(actionType) {
   } catch(e) {}
 
   if (!handled) {
-    const customKey = localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq');
+    const customKey = getStoredKey('kalki_custom_key_openrouter') || getStoredKey('kalki_custom_key_gemini') || getStoredKey('kalki_custom_key_groq');
     if (customKey) {
       output.textContent = 'Processing via client neural gateway...';
       try {
@@ -2855,7 +2808,7 @@ async function runGameDevAction() {
   } catch(e) {}
 
   if (!handled) {
-    const customKey = localStorage.getItem('kalki_custom_key_openrouter') || localStorage.getItem('kalki_custom_key_gemini') || localStorage.getItem('kalki_custom_key_groq');
+    const customKey = getStoredKey('kalki_custom_key_openrouter') || getStoredKey('kalki_custom_key_gemini') || getStoredKey('kalki_custom_key_groq');
     if (customKey) {
       resultEl.textContent = 'Synthesizing game design via client neural gateway...';
       try {
@@ -3400,29 +3353,38 @@ async function deleteMemoryAction(key) {
   showToast('Memory removed');
 }
 
-// ── Universal Custom Keys (LocalStorage) ─────────────────────────
+// ── Universal Custom Keys (Isolated Session Storage - Zero Plaintext Disk Exposure) ──
 function saveCustomKeys() {
   const orKey = document.getElementById('user-key-openrouter').value.trim();
   const gemKey = document.getElementById('user-key-gemini').value.trim();
   const groqKey = document.getElementById('user-key-groq').value.trim();
 
-  if (orKey) localStorage.setItem('kalki_custom_key_openrouter', orKey);
-  if (gemKey) localStorage.setItem('kalki_custom_key_gemini', gemKey);
-  if (groqKey) localStorage.setItem('kalki_custom_key_groq', groqKey);
+  // Clear any legacy plain localStorage keys for security
+  localStorage.removeItem('kalki_custom_key_openrouter');
+  localStorage.removeItem('kalki_custom_key_gemini');
+  localStorage.removeItem('kalki_custom_key_groq');
 
-  showToast('Custom keys saved to local browser storage');
+  // Save to isolated sessionStorage with base64 obfuscation
+  if (orKey) sessionStorage.setItem('kalki_custom_key_openrouter', btoa(encodeURIComponent(orKey)));
+  else sessionStorage.removeItem('kalki_custom_key_openrouter');
+
+  if (gemKey) sessionStorage.setItem('kalki_custom_key_gemini', btoa(encodeURIComponent(gemKey)));
+  else sessionStorage.removeItem('kalki_custom_key_gemini');
+
+  if (groqKey) sessionStorage.setItem('kalki_custom_key_groq', btoa(encodeURIComponent(groqKey)));
+  else sessionStorage.removeItem('kalki_custom_key_groq');
+
+  showToast('Keys securely loaded into session memory');
+  updateQuotaUI();
 }
 
 function loadCustomKeys() {
-  if (localStorage.getItem('kalki_custom_key_openrouter')) {
-    document.getElementById('user-key-openrouter').value = localStorage.getItem('kalki_custom_key_openrouter');
-  }
-  if (localStorage.getItem('kalki_custom_key_gemini')) {
-    document.getElementById('user-key-gemini').value = localStorage.getItem('kalki_custom_key_gemini');
-  }
-  if (localStorage.getItem('kalki_custom_key_groq')) {
-    document.getElementById('user-key-groq').value = localStorage.getItem('kalki_custom_key_groq');
-  }
+  const orKey = getStoredKey('kalki_custom_key_openrouter');
+  const gemKey = getStoredKey('kalki_custom_key_gemini');
+  const groqKey = getStoredKey('kalki_custom_key_groq');
+  if (orKey) document.getElementById('user-key-openrouter').value = orKey;
+  if (gemKey) document.getElementById('user-key-gemini').value = gemKey;
+  if (groqKey) document.getElementById('user-key-groq').value = groqKey;
 }
 
 // ── Sessions Management ──────────────────────────────────────────

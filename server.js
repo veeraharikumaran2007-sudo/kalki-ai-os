@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const crypto = require("crypto");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -234,6 +235,16 @@ async function runOpenRouter(message, history = []) {
 // SECURE API ENDPOINTS
 // ====================================================================
 
+// Secure Founder Verification Endpoint (Zero plain email exposed)
+app.post("/api/auth/verify-founder", rateLimiter, (req, res) => {
+  const { email } = req.body || {};
+  if (!email || typeof email !== "string") return res.json({ isFounder: false });
+  const hash = crypto.createHash("sha256").update(email.trim().toLowerCase()).digest("hex");
+  const founderHash = process.env.FOUNDER_EMAIL_HASH || "e45befa0a5308fa779339a5f563d6b5361cf9f691dda840e91117e7588bc9a53";
+  const isFounder = hash === founderHash;
+  return res.json({ isFounder });
+});
+
 // Standard Chat Endpoint
 app.post("/api/chat", rateLimiter, async (req, res) => {
   const { message, model = "flash", history = [] } = req.body;
@@ -249,28 +260,39 @@ app.post("/api/chat", rateLimiter, async (req, res) => {
   try {
     let result = null;
 
-    if (process.env.OPENROUTER_API_KEY) {
-      try {
-        result = await runOpenRouter(message, history);
-      } catch(e) {
-        console.warn("OpenRouter fallback in /api/chat:", e.message);
+    // PRIMARY: Groq (4-key rotation, ultra-fast 300 t/s)
+    if (GROQ_KEYS.length > 0) {
+      const models = ["llama-3.3-70b-versatile", "llama3-70b-8192", "mixtral-8x7b-32768"];
+      for (const model of models) {
+        try {
+          result = await runGroq(message, model, history);
+          if (result) break;
+        } catch(e) {
+          console.warn(`Groq (${model}) failed:`, e.message);
+        }
       }
     }
 
-    if (!result && GROQ_KEYS.length > 0) {
+    // FALLBACK 1: OpenRouter
+    if (!result && process.env.OPENROUTER_API_KEY) {
       try {
-        result = await runGroq(message, "qwen/qwen3.8-27b", history);
-      } catch(e) {}
+        result = await runOpenRouter(message, history);
+      } catch(e) {
+        console.warn("OpenRouter fallback failed:", e.message);
+      }
     }
 
+    // FALLBACK 2: Gemini
     if (!result && process.env.GEMINI_API_KEY) {
       try {
         result = await runGemini(message, history);
-      } catch(e) {}
+      } catch(e) {
+        console.warn("Gemini fallback failed:", e.message);
+      }
     }
 
     if (!result) {
-      throw new Error("All Kalki neural pipelines are currently processing heavy load. Please retry in a few seconds.");
+      throw new Error("All neural pipelines busy. Please retry.");
     }
 
     return res.json({
