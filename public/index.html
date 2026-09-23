@@ -114,6 +114,24 @@
     --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-mono: "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   }
+  [data-theme="light"] {
+    --bg-base: #f5f5f7;
+    --bg-surface: #ffffff;
+    --bg-panel: #f0f0f4;
+    --bg-card: #ffffff;
+    --bg-hover: #e5e5ea;
+    --border: #e0e0e6;
+    --border-light: #ececf0;
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --text-muted: #8e8e93;
+    --accent: #111111;
+    --accent-glow: rgba(0, 0, 0, 0.06);
+    --accent-dark: #333333;
+  }
+  [data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: #c7c7cc;
+  }
   body {
     background: var(--bg-base);
     color: var(--text-primary);
@@ -647,7 +665,7 @@
     color: var(--text-primary);
   }
   .ai-text p { margin: 8px 0; }
-  .ai-text h1, .ai-text h2, .ai-text h3 { margin: 14px 0 8px; font-weight: 700; color: #fff; }
+  .ai-text h1, .ai-text h2, .ai-text h3 { margin: 14px 0 8px; font-weight: 700; color: var(--text-primary); }
   .ai-text ul, .ai-text ol { margin: 8px 0; padding-left: 20px; }
   .ai-text li { margin: 4px 0; }
   .ai-text img {
@@ -1215,7 +1233,7 @@
 
             <!-- Status Banner -->
             <div class="quota-upgrade-box" id="quota-upgrade-box" style="border: 1px solid var(--border-light); background: var(--bg-card);">
-              <div class="quota-upgrade-title" style="color:#ffffff;">KALKI Autonomous Quota</div>
+              <div class="quota-upgrade-title" style="color:var(--text-primary);">KALKI Autonomous Quota</div>
               <div class="quota-upgrade-desc" style="color:var(--text-secondary);">Your AI pipeline automatically refreshes every 8 hours for continuous enterprise performance.</div>
             </div>
           </div>
@@ -1267,7 +1285,7 @@
                 <div class="ai-body">
                   <div class="ai-meta">Kalki AI · Sovereign OS</div>
                   <div class="ai-text">
-                    Welcome to Kalki AI OS — powered by KALKI GMR 3.4. How can I help you today?
+                    Welcome to Kalki
                   </div>
                 </div>
               </div>
@@ -1582,6 +1600,20 @@
     <!-- 11. SETTINGS & UNIVERSAL PROVIDERS WORKSPACE -->
     <div class="workspace-view" id="view-settings">
       <div class="studio-layout">
+        <!-- Appearance & Workspace Theme (Directly in Settings) -->
+        <div class="card" style="margin-bottom: 14px;">
+          <div class="card-title">Appearance & Theme</div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">Switch between Black and White themes.</p>
+          <div style="display: flex; gap: 12px;">
+            <button type="button" class="primary-btn" id="theme-btn-dark" onclick="setAppTheme('dark')" style="flex: 1; padding: 10px; background: #000000; color: #ffffff; border: 1px solid #333333; cursor: pointer; border-radius: var(--radius-sm); font-weight: 600;">
+              Black Theme
+            </button>
+            <button type="button" class="primary-btn" id="theme-btn-light" onclick="setAppTheme('light')" style="flex: 1; padding: 10px; background: #ffffff; color: #000000; border: 1px solid #cccccc; cursor: pointer; border-radius: var(--radius-sm); font-weight: 600;">
+              White Theme
+            </button>
+          </div>
+        </div>
+
         <div class="card">
           <div class="card-title">Universal AI Provider Hub (Bring Your Own Key)</div>
           <p style="font-size: 12px; color: var(--text-secondary);">Add your own free API keys to unlock infinite messages and 300+ models with zero limits.</p>
@@ -3387,6 +3419,42 @@ function loadCustomKeys() {
   if (groqKey) document.getElementById('user-key-groq').value = groqKey;
 }
 
+// ── Theme Switcher (Directly from Settings) ──────────────────────
+function setAppTheme(theme) {
+  const bDark = document.getElementById('theme-btn-dark');
+  const bLight = document.getElementById('theme-btn-light');
+
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    try { localStorage.setItem('kalki_theme', 'light'); } catch(e) {}
+    if (bDark) {
+      bDark.style.opacity = '0.5';
+      bDark.style.outline = 'none';
+    }
+    if (bLight) {
+      bLight.style.opacity = '1';
+      bLight.style.outline = '2px solid var(--accent)';
+    }
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    try { localStorage.setItem('kalki_theme', 'dark'); } catch(e) {}
+    if (bDark) {
+      bDark.style.opacity = '1';
+      bDark.style.outline = '2px solid var(--accent)';
+    }
+    if (bLight) {
+      bLight.style.opacity = '0.5';
+      bLight.style.outline = 'none';
+    }
+  }
+}
+
+function initAppTheme() {
+  let saved = 'dark';
+  try { saved = localStorage.getItem('kalki_theme') || 'dark'; } catch(e) {}
+  setAppTheme(saved);
+}
+
 // ── Sessions Management ──────────────────────────────────────────
 async function loadSessions() {
   // First load from localStorage for instant offline access
@@ -3490,7 +3558,9 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ── Initialization ───────────────────────────────────────────────
+initAppTheme();
 window.addEventListener('DOMContentLoaded', () => {
+  initAppTheme();
   loadQuotaState();
   loadSessions();
   loadPrompts();
