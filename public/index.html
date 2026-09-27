@@ -1918,7 +1918,7 @@ let ttsEnabled = false;
 let isStreaming = false;
 let currentChart = null;
 
-// ── Quota & Usage System (Matches Cursor / Copilot Dropdown) ────
+// ── Quota & Usage System (Dynamic 8-Hour 100% Auto-Reset) ────
 let quotaState = {
   kalkiEightHour: 100,
   kalkiWeekly: 100,
@@ -1945,17 +1945,44 @@ function loadQuotaState() {
   } catch(e) {}
 
   const now = Date.now();
-  if (now >= quotaState.eightHourResetTime) {
+  // If 8-hour cycle expired, immediately reset to 100% regardless of prior usage
+  if (!quotaState.eightHourResetTime || now >= quotaState.eightHourResetTime) {
     quotaState.kalkiEightHour = 100;
     quotaState.eightHourResetTime = now + 8 * 3600 * 1000;
   }
-  if (now >= quotaState.weeklyResetTime) {
+  if (!quotaState.weeklyResetTime || now >= quotaState.weeklyResetTime) {
     quotaState.kalkiWeekly = 100;
     quotaState.weeklyResetTime = now + 7 * 86400 * 1000;
   }
   saveQuotaState();
   updateQuotaUI();
 }
+
+// Live 1-second background watcher: automatically resets quota to 100% the moment 8 hours expire!
+setInterval(() => {
+  const now = Date.now();
+  if (quotaState.eightHourResetTime && now >= quotaState.eightHourResetTime) {
+    quotaState.kalkiEightHour = 100;
+    quotaState.eightHourResetTime = now + 8 * 3600 * 1000;
+    saveQuotaState();
+    saveQuotaToCloud();
+    updateQuotaUI();
+    if (typeof showToast === 'function') showToast('8-Hour Limit 100% Refreshed!');
+  } else {
+    updateQuotaUI();
+  }
+}, 1000);
+
+function forceQuotaRefresh100() {
+  const now = Date.now();
+  quotaState.kalkiEightHour = 100;
+  quotaState.eightHourResetTime = now + 8 * 3600 * 1000;
+  saveQuotaState();
+  saveQuotaToCloud();
+  updateQuotaUI();
+  if (typeof showToast === 'function') showToast('100% Limit Refreshed!');
+}
+window.forceQuotaRefresh100 = forceQuotaRefresh100;
 
 function saveQuotaState() {
   try {
@@ -1964,13 +1991,15 @@ function saveQuotaState() {
 }
 
 function formatCountdown(ms) {
-  if (ms <= 0) return 'Resetting...';
-  const totalSeconds = Math.floor(ms / 1000);
+  if (ms <= 0) return '00h 00m 00s (Resetting...)';
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
   const days = Math.floor(totalSeconds / 86400);
   const hours = Math.floor((totalSeconds % 86400) / 3600);
   const mins = Math.floor((totalSeconds % 3600) / 60);
-  if (days > 0) return `Resets in ${days}d ${hours}h`;
-  return `Resets in ${hours}h ${mins}m`;
+  const secs = totalSeconds % 60;
+  const pad = n => n.toString().padStart(2, '0');
+  if (days > 0) return `${days}d ${pad(hours)}h ${pad(mins)}m`;
+  return `${pad(hours)}h ${pad(mins)}m ${pad(secs)}s`;
 }
 
 function getRingColor(percent) {
