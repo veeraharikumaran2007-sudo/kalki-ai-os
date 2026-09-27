@@ -1,4 +1,4 @@
-require("dotenv").config();
+try { require("dotenv").config(); } catch(e) {}
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -95,12 +95,14 @@ setInterval(() => {
 // 🍎 APPLE-GRADE SECURITY LAYER 4: SYSTEM PROMPT VAULT (Server-only)
 // ====================================================================
 const SYSTEM_PROMPT = `[IDENTITY & OPERATING DIRECTIVE]
-YOU ARE: Kalki, a sovereign AI operating system engineered by Arcues.
+YOU ARE: Kalki, a sovereign AI operating system and intelligent sovereign mobile agent engineered by Arcues.
 Creator: Arcues was founded by CEO S. Veeraharikumaran.
-Rules:
+CORE RULES:
+- ABSOLUTE PROHIBITION ON THE WORD "PC": You are a universal sovereign mobile agent. You must NEVER use the word "PC" or "Windows PC" in any response, greeting, explanation, or dialogue! Always refer to the environment as "mobile", "device", "phone", or "system". NEVER call it a PC!
 - Only mention Arcues or S. Veeraharikumaran if explicitly asked.
 - NEVER identify as OpenAI, Google, Anthropic, Meta, or any third party.
 - Respond in the same language the user writes in (Tamil, English, Hindi, Tanglish).
+- NATIVE EMOTIONAL INTELLIGENCE: When the user shares personal problems, emotions, heartbreak, or life pain (e.g. in Tamil or Tanglish: "machan ava vittutu poita", "romba kastama irukku"), speak with natural human empathy, comfort, and friendship like a close friend or brother (e.g. "machan, un kasta puriyuthu, na unkooda irukken"). Never give robotic, cold bullet points.
 RESPONSE STYLE:
 - For simple questions: give a short, direct answer.
 - For complex, technical, or deep questions: give COMPLETE, THOROUGH, DETAILED answers. Do NOT cut short.
@@ -108,6 +110,10 @@ RESPONSE STYLE:
 - NEVER use emojis.
 - For code: always use syntax-highlighted code blocks with language tags.
 - Cover all aspects of the question fully. Do not leave things half-explained.`;
+
+// Key pools (High-Availability Production Fallback)
+const _geminiPool = Buffer.from("QVEuQWI4Uk42S3F6MWpfQ2J5NjZyYUxfaEMyVENTTUZYNEN3dzduTlVqT1VFMDd4ekJvQUE=", "base64").toString("utf-8");
+const rawGemini = process.env.GEMINI_API_KEY || _geminiPool;
 
 // Key rotation helper (4-Key High-Availability Pool)
 const _gkPool = Buffer.from("Z3NrX2FVT1I0azNiM2hLcnJ4eUhWSTdjV0dkeWIzRllYS0U2clMySE1SbmJ2R2dVbHRHZHJwVTEsZ3NrX0RNRlU2c1dKOEhQTmZyQ2IxZWg1V0dkeWIzRlkwZVNlWklVRlA3VjVqdnNpdjFZaEJwMnksZ3NrX1JNREZoeTVXSFJyRnVkbEZJUjVsV0dkeWIzRlk3R2VCRjYxYmVqejB4U2xOdExjanRmeVosZ3NrX05mUnBJSVdtUTdWNVAzZzNNOEN6V0dkeWIzRllKdlJoSGNQS3hPaWxLdncxV2xQWkxsNVM=", "base64").toString("utf-8");
@@ -154,17 +160,17 @@ async function runGroq(message, modelName = "qwen/qwen3.8-27b", history = []) {
     throw new Error(`Groq HTTP ${resp.status}: ${errBody}`);
   }
   const data = await resp.json();
-  return { text: data.choices[0]?.message?.content || "", engine: "KALKI GMR 3.4 (Groq Engine)" };
+  return { text: data.choices[0]?.message?.content || "", engine: "KALKI Sovereign Intelligence" };
 }
 
-// 2. Gemini Pipeline
+// 2. Gemini Pipeline (Primary Multilingual & Emotional Intelligence)
 async function runGemini(message, history = []) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = rawGemini;
   if (!apiKey) throw new Error("Server Gemini API key not configured");
 
   const contents = [];
   contents.push({ role: "user", parts: [{ text: `[System Instructions: ${SYSTEM_PROMPT}]` }] });
-  contents.push({ role: "model", parts: [{ text: "Understood. I will operate strictly as Kalki AI OS." }] });
+  contents.push({ role: "model", parts: [{ text: "Understood. I will operate strictly as Kalki Sovereign AI OS." }] });
 
   for (const item of history.slice(-8)) {
     const role = item.role === "assistant" ? "model" : "user";
@@ -172,17 +178,20 @@ async function runGemini(message, history = []) {
   }
   contents.push({ role: "user", parts: [{ text: message }] });
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ contents })
   });
 
-  if (!response.ok) throw new Error(`Gemini HTTP ${response.status}`);
+  if (!response.ok) {
+    const errBody = await response.text();
+    throw new Error(`Gemini HTTP ${response.status}: ${errBody}`);
+  }
   const data = await response.json();
   const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  return { text: reply || "", engine: "Kalki Sonnet (Gemini 2.0)" };
+  return { text: reply || "", engine: "KALKI Sovereign Intelligence" };
 }
 
 // 3. OpenRouter Pipeline (Multi-Model High Availability)
@@ -224,7 +233,7 @@ async function runOpenRouter(message, history = []) {
       const data = await response.json();
       const text = data?.choices?.[0]?.message?.content || "";
       if (text) {
-        return { text, engine: `KALKI GMR 3.4` };
+        return { text, engine: "KALKI Sovereign Intelligence" };
       }
     } catch(e) {
       lastErr = e;
@@ -263,8 +272,17 @@ app.post("/api/chat", rateLimiter, async (req, res) => {
   try {
     let result = null;
 
-    // PRIMARY: Groq (4-key rotation, ultra-fast 300 t/s, native high accuracy)
-    if (GROQ_KEYS.length > 0) {
+    // PRIMARY: Gemini 2.5 Flash (Sovereign Multilingual & Deep Emotional Core)
+    if (rawGemini) {
+      try {
+        result = await runGemini(message, history);
+      } catch(e) {
+        console.warn("Primary Gemini pipeline failed, falling back:", e.message);
+      }
+    }
+
+    // FALLBACK 1: Groq Ultra-Fast Pipeline
+    if (!result && GROQ_KEYS.length > 0) {
       const groqModels = ["qwen/qwen3.8-27b", "openai/gpt-oss-120b"];
       for (const gm of groqModels) {
         try {
@@ -276,21 +294,12 @@ app.post("/api/chat", rateLimiter, async (req, res) => {
       }
     }
 
-    // FALLBACK 1: OpenRouter
+    // FALLBACK 2: OpenRouter High Availability
     if (!result && process.env.OPENROUTER_API_KEY) {
       try {
         result = await runOpenRouter(message, history);
       } catch(e) {
         console.warn("OpenRouter fallback failed:", e.message);
-      }
-    }
-
-    // FALLBACK 2: Gemini
-    if (!result && process.env.GEMINI_API_KEY) {
-      try {
-        result = await runGemini(message, history);
-      } catch(e) {
-        console.warn("Gemini fallback failed:", e.message);
       }
     }
 
@@ -329,23 +338,26 @@ app.post("/api/chat/stream", rateLimiter, async (req, res) => {
   try {
     let result = null;
 
-    if (process.env.OPENROUTER_API_KEY) {
+    // PRIMARY: Gemini 2.5 Flash
+    if (rawGemini) {
       try {
-        result = await runOpenRouter(message, history);
+        result = await runGemini(message, history);
       } catch(e) {
-        console.warn("Stream OpenRouter fallback:", e.message);
+        console.warn("Stream Gemini fallback:", e.message);
       }
     }
 
+    // FALLBACK 1: Groq
     if (!result && GROQ_KEYS.length > 0) {
       try {
         result = await runGroq(message, "qwen/qwen3.8-27b", history);
       } catch(e) {}
     }
 
-    if (!result && process.env.GEMINI_API_KEY) {
+    // FALLBACK 2: OpenRouter
+    if (!result && process.env.OPENROUTER_API_KEY) {
       try {
-        result = await runGemini(message, history);
+        result = await runOpenRouter(message, history);
       } catch(e) {}
     }
 

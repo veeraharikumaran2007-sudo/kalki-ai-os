@@ -587,29 +587,38 @@
 
   /* Chat Workspace Layout */
   .chat-layout { display: flex; flex: 1; overflow: hidden; }
-  .chat-history-col {
-    width: 180px;
-    background: rgba(18, 18, 23, 0.4);
-    border-right: 1px solid var(--border);
+  .sidebar-history-container {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    padding: 10px 8px;
     gap: 4px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 2px 2px 8px 2px;
+  }
+  .sidebar-history-container::-webkit-scrollbar {
+    width: 3px;
+  }
+  .sidebar-history-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
   }
   .session-tab {
-    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
     border-radius: var(--radius-sm);
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--text-secondary);
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: all 0.12s;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
   }
   .session-tab:hover { background: var(--bg-panel); color: var(--text-primary); }
-  .session-tab.active { background: var(--bg-panel); color: var(--accent); font-weight: 500; }
+  .session-tab.active { background: rgba(0, 240, 255, 0.08); color: var(--accent); border-color: rgba(0, 240, 255, 0.25); font-weight: 500; }
 
   .chat-main-col { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
   .chat-scroll {
@@ -1242,7 +1251,6 @@
       box-shadow: 8px 0 36px rgba(0,0,0,0.95);
     }
     .right-panel { display: none !important; }
-    .chat-history-col { display: none !important; }
     .mobile-bottom-nav { display: flex; }
     .chat-layout { flex-direction: column; }
     .chat-main-col { width: 100%; min-width: 0; }
@@ -1298,6 +1306,11 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Settings
       </div>
+      <div class="nav-section-label" style="margin-top: 16px; display: flex; align-items: center; justify-content: space-between;">
+        <span>History</span>
+        <button onclick="startNewChat()" title="Start New Chat" style="background: none; border: none; color: var(--accent); font-size: 11px; cursor: pointer; padding: 2px 4px; border-radius: 4px; font-weight: 600;">+ New</button>
+      </div>
+      <div class="sidebar-history-container" id="sessions-container"></div>
     </nav>
     <div class="sidebar-footer">
       <span>Kalki v3.0</span>
@@ -1402,9 +1415,6 @@
     <!-- 1. CHAT WORKSPACE -->
     <div class="workspace-view active" id="view-chat">
       <div class="chat-layout">
-        <div class="chat-history-col" id="sessions-container">
-          <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">History</div>
-        </div>
         <div class="chat-main-col">
           <div class="chat-scroll" id="chat-messages">
             <div class="welcome-hero-container" id="welcome-hero">
@@ -1784,6 +1794,16 @@
               White Theme
             </button>
           </div>
+        </div>
+
+        <!-- Chat History & Saved Sessions in Settings -->
+        <div class="card" style="margin-bottom: 14px;">
+          <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Chat History & Saved Sessions</span>
+            <button type="button" class="btn btn-secondary" style="font-size: 11px; padding: 4px 10px; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);" onclick="clearAllSessions()">Clear History</button>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px;">Quickly browse, reopen, or delete past conversation sessions.</p>
+          <div id="settings-sessions-list" style="display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto;"></div>
         </div>
 
         <div class="card">
@@ -4109,19 +4129,89 @@ async function loadSessions() {
 }
 function renderSessions() {
   const container = document.getElementById('sessions-container');
-  container.innerHTML = '<div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase; margin-bottom:6px;">History</div>';
-  sessions.forEach(s => {
-    const el = document.createElement('div');
-    el.className = 'session-tab' + (s.id === currentSessionId ? ' active' : '');
-    el.textContent = s.title || 'Untitled Session';
-    el.onclick = () => {
-      currentSessionId = s.id;
-      chatHistory = [...(s.history || [])];
-      renderChatFromHistory();
-      renderSessions();
-    };
-    container.appendChild(el);
-  });
+  const settingsList = document.getElementById('settings-sessions-list');
+
+  if (container) {
+    container.innerHTML = '';
+    if (sessions.length === 0) {
+      container.innerHTML = '<div style="font-size:11px; color:var(--text-muted); padding:6px 8px; font-style:italic;">No saved chats</div>';
+    } else {
+      sessions.forEach(s => {
+        const el = document.createElement('div');
+        el.className = 'session-tab' + (s.id === currentSessionId ? ' active' : '');
+        el.title = s.title || 'Untitled Session';
+        el.innerHTML = `
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="flex-shrink:0; opacity:0.75;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(s.title || 'Untitled Session')}</span>
+        `;
+        el.onclick = () => {
+          currentSessionId = s.id;
+          chatHistory = [...(s.history || [])];
+          renderChatFromHistory();
+          renderSessions();
+          switchView('chat');
+          const aside = document.querySelector('.sidebar');
+          if (aside && aside.classList.contains('open')) {
+            aside.classList.remove('open');
+          }
+        };
+        container.appendChild(el);
+      });
+    }
+  }
+
+  if (settingsList) {
+    settingsList.innerHTML = '';
+    if (sessions.length === 0) {
+      settingsList.innerHTML = '<div style="font-size:12px; color:var(--text-muted); padding:6px 0;">No saved conversations yet.</div>';
+    } else {
+      sessions.forEach(s => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--bg-panel); border-radius:var(--radius-sm); border:1px solid var(--border);';
+        row.innerHTML = `
+          <div style="font-size:12px; font-weight:500; color:var(--text-primary); cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:70%;">${escapeHtml(s.title || 'Untitled Session')}</div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn btn-secondary" style="font-size:11px; padding:3px 8px;" onclick="loadSessionFromSettings('${s.id}')">Open</button>
+            <button type="button" class="btn btn-secondary" style="font-size:11px; padding:3px 8px; color:#ef4444;" onclick="deleteSession('${s.id}')">Delete</button>
+          </div>
+        `;
+        settingsList.appendChild(row);
+      });
+    }
+  }
+}
+
+function loadSessionFromSettings(id) {
+  const s = sessions.find(item => item.id === id);
+  if (!s) return;
+  currentSessionId = s.id;
+  chatHistory = [...(s.history || [])];
+  renderChatFromHistory();
+  renderSessions();
+  switchView('chat');
+}
+
+function deleteSession(id) {
+  sessions = sessions.filter(s => s.id !== id);
+  if (currentSessionId === id) {
+    startNewChat();
+  } else {
+    renderSessions();
+  }
+  try {
+    localStorage.setItem('kalki_local_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+}
+
+function clearAllSessions() {
+  if (confirm("Are you sure you want to delete all saved conversations?")) {
+    sessions = [];
+    startNewChat();
+    renderSessions();
+    try {
+      localStorage.removeItem('kalki_local_sessions');
+    } catch(e) {}
+  }
 }
 function saveSession(titleCandidate) {
   const title = titleCandidate.slice(0, 28) + (titleCandidate.length > 28 ? '...' : '');
