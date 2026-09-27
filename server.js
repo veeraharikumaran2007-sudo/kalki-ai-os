@@ -111,57 +111,16 @@ RESPONSE STYLE:
 - For code: always use syntax-highlighted code blocks with language tags.
 - Cover all aspects of the question fully. Do not leave things half-explained.`;
 
-// Key pools (High-Availability Production Fallback)
+// Key pools (High-Availability Sovereign Production Fallback)
 const _geminiPool = Buffer.from("QVEuQWI4Uk42S3F6MWpfQ2J5NjZyYUxfaEMyVENTTUZYNEN3dzduTlVqT1VFMDd4ekJvQUE=", "base64").toString("utf-8");
 const rawGemini = process.env.GEMINI_API_KEY || _geminiPool;
 
-// Key rotation helper (4-Key High-Availability Pool)
-const _gkPool = Buffer.from("Z3NrX2FVT1I0azNiM2hLcnJ4eUhWSTdjV0dkeWIzRllYS0U2clMySE1SbmJ2R2dVbHRHZHJwVTEsZ3NrX0RNRlU2c1dKOEhQTmZyQ2IxZWg1V0dkeWIzRlkwZVNlWklVRlA3VjVqdnNpdjFZaEJwMnksZ3NrX1JNREZoeTVXSFJyRnVkbEZJUjVsV0dkeWIzRlk3R2VCRjYxYmVqejB4U2xOdExjanRmeVosZ3NrX05mUnBJSVdtUTdWNVAzZzNNOEN6V0dkeWIzRllKdlJoSGNQS3hPaWxLdncxV2xQWkxsNVM=", "base64").toString("utf-8");
-const rawGroq = process.env.GROQ_API_KEYS || process.env.GROQ_API_KEY || _gkPool;
-const GROQ_KEYS = rawGroq.split(",").map(k => k.trim()).filter(Boolean);
-let groqIndex = 0;
-
-function getGroqKey() {
-  if (GROQ_KEYS.length === 0) return null;
-  const key = GROQ_KEYS[groqIndex % GROQ_KEYS.length];
-  groqIndex++;
-  return key;
-}
+const _openRouterPool = Buffer.from("c2stb3ItdjEtOTBhNWI2NjEzNjlmMGUwODRmYTBhM2RkNjlmNjY2NzZmOTQwYjljMzIyOTAzNDNhOTJhNTUyNzFjNGY1ODdmYw==", "base64").toString("utf-8");
+const rawOpenRouter = process.env.OPENROUTER_API_KEY || _openRouterPool;
 
 // ====================================================================
 // ENGINE PIPELINES (Strict Server-Side Key Access)
 // ====================================================================
-
-// 1. Groq Ultra-Fast Pipeline
-async function runGroq(message, modelName = "qwen/qwen3.8-27b", history = []) {
-  const key = getGroqKey();
-  if (!key) throw new Error("Server Groq API key not configured");
-
-  const msgs = [{ role: "system", content: SYSTEM_PROMPT }];
-  history.slice(-8).forEach(h => msgs.push({ role: h.role, content: h.content }));
-  msgs.push({ role: "user", content: message });
-
-  const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${key}`
-    },
-    body: JSON.stringify({
-      model: modelName,
-      messages: msgs,
-      max_tokens: 4096,
-      temperature: 0.6
-    })
-  });
-
-  if (!resp.ok) {
-    const errBody = await resp.text();
-    throw new Error(`Groq HTTP ${resp.status}: ${errBody}`);
-  }
-  const data = await resp.json();
-  return { text: data.choices[0]?.message?.content || "", engine: "KALKI Sovereign Intelligence" };
-}
 
 // 2. Gemini Pipeline (Primary Multilingual & Emotional Intelligence)
 async function runGemini(message, history = []) {
@@ -194,9 +153,9 @@ async function runGemini(message, history = []) {
   return { text: reply || "", engine: "KALKI Sovereign Intelligence" };
 }
 
-// 3. OpenRouter Pipeline (Multi-Model High Availability)
+// 2. OpenRouter Pipeline (Multi-Model High Availability)
 async function runOpenRouter(message, history = []) {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const apiKey = rawOpenRouter;
   if (!apiKey) throw new Error("Server OpenRouter key not configured");
 
   const messages = [
@@ -277,25 +236,12 @@ app.post("/api/chat", rateLimiter, async (req, res) => {
       try {
         result = await runGemini(message, history);
       } catch(e) {
-        console.warn("Primary Gemini pipeline failed, falling back:", e.message);
+        console.warn("Primary Gemini pipeline failed, falling back to OpenRouter:", e.message);
       }
     }
 
-    // FALLBACK 1: Groq Ultra-Fast Pipeline
-    if (!result && GROQ_KEYS.length > 0) {
-      const groqModels = ["qwen/qwen3.8-27b", "openai/gpt-oss-120b"];
-      for (const gm of groqModels) {
-        try {
-          result = await runGroq(message, gm, history);
-          if (result && result.text) break;
-        } catch(e) {
-          console.warn(`Groq (${gm}) failed:`, e.message);
-        }
-      }
-    }
-
-    // FALLBACK 2: OpenRouter High Availability
-    if (!result && process.env.OPENROUTER_API_KEY) {
+    // FALLBACK: OpenRouter High Availability (DeepSeek R1 / Gemma / Qwen)
+    if (!result && rawOpenRouter) {
       try {
         result = await runOpenRouter(message, history);
       } catch(e) {
@@ -343,19 +289,12 @@ app.post("/api/chat/stream", rateLimiter, async (req, res) => {
       try {
         result = await runGemini(message, history);
       } catch(e) {
-        console.warn("Stream Gemini fallback:", e.message);
+        console.warn("Stream Gemini fallback to OpenRouter:", e.message);
       }
     }
 
-    // FALLBACK 1: Groq
-    if (!result && GROQ_KEYS.length > 0) {
-      try {
-        result = await runGroq(message, "qwen/qwen3.8-27b", history);
-      } catch(e) {}
-    }
-
-    // FALLBACK 2: OpenRouter
-    if (!result && process.env.OPENROUTER_API_KEY) {
+    // FALLBACK: OpenRouter
+    if (!result && rawOpenRouter) {
       try {
         result = await runOpenRouter(message, history);
       } catch(e) {}
