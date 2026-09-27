@@ -1085,7 +1085,7 @@
     width: 4px;
     height: 36px;
     border-radius: 99px;
-    background: linear-gradient(180deg, #00f0ff 0%, #bc13fe 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #71717a 100%);
     opacity: 0.35;
     transition: all 0.2s ease;
     transform-origin: bottom;
@@ -1106,7 +1106,7 @@
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 0 50px rgba(0, 240, 255, 0.45);
+    box-shadow: 0 0 45px rgba(255, 255, 255, 0.12);
     background: transparent;
   }
   .jarvis-master-img {
@@ -1117,23 +1117,23 @@
     object-position: center;
     mask-image: radial-gradient(ellipse 46% 48% at 50% 50%, #000 62%, rgba(0,0,0,0.5) 82%, transparent 98%);
     -webkit-mask-image: radial-gradient(ellipse 46% 48% at 50% 50%, #000 62%, rgba(0,0,0,0.5) 82%, transparent 98%);
-    filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.85)) contrast(1.15) brightness(1.06);
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.35)) grayscale(100%) contrast(1.15) brightness(1.06);
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
     pointer-events: none;
   }
   .jarvis-speaking #jarvis-conch-img {
-    filter: drop-shadow(0 0 55px rgba(0, 240, 255, 1.0)) drop-shadow(0 0 85px rgba(188, 19, 254, 0.95)) !important;
+    filter: drop-shadow(0 0 45px rgba(255, 255, 255, 0.7)) grayscale(100%) contrast(1.25) !important;
     transform: scale(1.04);
   }
   .jarvis-mic-trigger:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 35px rgba(0,240,255,0.7), inset 0 0 20px rgba(0,240,255,0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.15);
   }
   .jarvis-mic-trigger.recording {
-    border-color: #ef4444 !important;
-    color: #ef4444 !important;
-    box-shadow: 0 0 35px rgba(239,68,68,0.7), inset 0 0 20px rgba(239,68,68,0.4) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.25) !important;
     animation: jarvisPulse 0.9s infinite !important;
   }
   .jarvis-chip {
@@ -1148,10 +1148,56 @@
     transition: all 0.2s ease;
   }
   .jarvis-chip:hover {
-    background: rgba(0,240,255,0.1);
-    border-color: rgba(0,240,255,0.3);
-    color: #00f0ff;
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    color: #ffffff;
     transform: translateY(-1px);
+  }
+
+  /* Mobile Deep Launcher Action Cards (Monochrome Apple / Nothing style) */
+  .mobile-action-card {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #111113;
+    border: 1px solid #27272a;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    animation: fadeIn 0.25s ease-out;
+  }
+  .mobile-action-card-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #a1a1aa;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mobile-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 7px 14px;
+    background: #ffffff;
+    color: #000000 !important;
+    font-weight: 600;
+    font-size: 12.5px;
+    border-radius: 7px;
+    text-decoration: none !important;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(255,255,255,0.15);
+  }
+  .mobile-action-btn:hover {
+    background: #e4e4e7;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.25);
   }
 
   /* Backdrop for mobile drawer */
@@ -1338,7 +1384,7 @@
         <div class="quota-pill" id="quota-pill-btn" onclick="toggleQuotaDropdown(event)">
           <svg width="16" height="16" viewBox="0 0 36 36">
             <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
-            <path id="quota-top-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
+            <path id="quota-top-ring" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#ffffff" stroke-width="4" stroke-dasharray="100, 100" stroke-linecap="round" transform="rotate(-90 18 18)"/>
           </svg>
           <span id="quota-top-val">100%</span>
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg>
@@ -1467,6 +1513,10 @@
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
                   </button>
                   <input type="file" id="hidden-file-input" style="display:none" accept="image/*,.pdf,.txt,.md,.csv,.json,.js,.ts,.py,.html,.css,.cpp,.sql" onchange="handleFileUpload(event)">
+                  <input type="file" id="mobile-camera-input" style="display:none" accept="image/*" capture="environment" onchange="handleMobileCameraCapture(event)">
+                  <button class="dock-btn" id="camera-btn" title="Take Photo with Camera" onclick="if(!currentUser){openAuthModal();}else{triggerMobileCameraCapture();}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                  </button>
                   <button class="dock-btn" id="mic-btn" title="Voice Input" onclick="if(!currentUser){openAuthModal();}else{toggleSpeechRecognition();}">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
                   </button>
@@ -1697,29 +1747,29 @@
 
     <!-- 9. KALKI SOVEREIGN JARVIS AGENT WORKSPACE -->
     <div class="workspace-view" id="view-agents" style="background:#000000; overflow-y:auto; justify-content:center; align-items:center; position:relative; min-height:100%;">
-      <!-- Glowing Ambient Background Aura -->
-      <div style="position:absolute; width:650px; height:650px; background:radial-gradient(circle, rgba(0,240,255,0.08) 0%, rgba(188,19,254,0.04) 45%, transparent 70%); filter:blur(70px); pointer-events:none; z-index:0;"></div>
+      <!-- Ambient Monochrome Background Aura -->
+      <div style="position:absolute; width:650px; height:650px; background:radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 45%, transparent 70%); filter:blur(70px); pointer-events:none; z-index:0;"></div>
 
       <div class="jarvis-agent-container" style="max-width:850px; width:92%; margin:auto; display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; z-index:1; padding:24px 10px;">
         
-        <!-- Status Header Pill -->
-        <div style="display:flex; align-items:center; gap:8px; padding:6px 18px; border-radius:999px; background:rgba(0,240,255,0.06); border:1px solid rgba(0,240,255,0.25); margin-bottom:12px; box-shadow:0 0 25px rgba(0,240,255,0.15);">
-          <span class="jarvis-status-dot" style="width:8px; height:8px; border-radius:50%; background:#00f0ff; box-shadow:0 0 10px #00f0ff;"></span>
-          <span style="font-size:11px; font-weight:700; color:#00f0ff; letter-spacing:1.5px; text-transform:uppercase;" id="jarvis-status-text">KALKI SOVEREIGN AGENT • ONLINE</span>
+        <!-- Status Header Pill (Monochrome) -->
+        <div style="display:flex; align-items:center; gap:8px; padding:6px 18px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.18); margin-bottom:12px; box-shadow:0 4px 20px rgba(0,0,0,0.6);">
+          <span class="jarvis-status-dot" style="width:8px; height:8px; border-radius:50%; background:#ffffff; box-shadow:0 0 10px rgba(255,255,255,0.8);"></span>
+          <span style="font-size:11px; font-weight:700; color:#ffffff; letter-spacing:1.5px; text-transform:uppercase;" id="jarvis-status-text">KALKI SOVEREIGN AGENT • ONLINE</span>
         </div>
 
-        <!-- Master Golden Shankha JARVIS HUD Core (Pure Hologram, Conch Only, Zero Card Edge) -->
+        <!-- Master Shankha JARVIS HUD Core (Pure Monochrome Hologram) -->
         <div style="position:relative; width:410px; height:410px; max-width:92vw; display:flex; align-items:center; justify-content:center; margin:6px auto;">
-          <!-- Orbital Rotating Neon Rings -->
-          <div class="jarvis-pulse-ring" style="position:absolute; inset:-8px; border-radius:50%; border:1px solid rgba(0,240,255,0.22); animation:jarvisPulse 3.5s ease-in-out infinite; pointer-events:none;"></div>
-          <div class="jarvis-glow-ring" style="position:absolute; inset:6px; border-radius:50%; border:1.5px dashed rgba(0,240,255,0.35); animation:jarvisRotate 32s linear infinite; pointer-events:none;"></div>
-          <div class="jarvis-inner-ring" style="position:absolute; inset:18px; border-radius:50%; border:1px dotted rgba(0,255,163,0.22); animation:jarvisCounterRotate 24s linear infinite; pointer-events:none;"></div>
+          <!-- Orbital Rotating Monochrome Rings -->
+          <div class="jarvis-pulse-ring" style="position:absolute; inset:-8px; border-radius:50%; border:1px solid rgba(255,255,255,0.14); animation:jarvisPulse 3.5s ease-in-out infinite; pointer-events:none;"></div>
+          <div class="jarvis-glow-ring" style="position:absolute; inset:6px; border-radius:50%; border:1.5px dashed rgba(255,255,255,0.22); animation:jarvisRotate 32s linear infinite; pointer-events:none;"></div>
+          <div class="jarvis-inner-ring" style="position:absolute; inset:18px; border-radius:50%; border:1px dotted rgba(255,255,255,0.12); animation:jarvisCounterRotate 24s linear infinite; pointer-events:none;"></div>
           <!-- Ambient circular backlight behind emblem -->
-          <div style="position:absolute; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle, rgba(0,240,255,0.22) 0%, rgba(188,19,254,0.12) 60%, transparent 80%); filter:blur(25px); pointer-events:none;"></div>
+          <div style="position:absolute; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 75%); filter:blur(25px); pointer-events:none;"></div>
 
           <!-- Pure Conch Hologram Lens -->
           <div class="jarvis-hologram-wrap" onclick="toggleJarvisVoiceInput()" title="Tap to Speak with KALKI">
-            <img src="/kalki_golden_conch_avatar.png" id="jarvis-conch-img" class="jarvis-master-img" alt="KALKI Sovereign Golden Shankha Core">
+            <img src="/kalki_golden_conch_avatar.png" id="jarvis-conch-img" class="jarvis-master-img" alt="KALKI Sovereign Shankha Core">
           </div>
         </div>
 
@@ -1741,26 +1791,26 @@
           <span class="j-spectrum-bar" style="height:14px; animation-delay:0.35s;"></span>
         </div>
 
-        <!-- Live Subtitle / Voice Transcript Terminal (Full English) -->
-        <div id="jarvis-transcript-box" style="width:100%; max-width:620px; min-height:64px; padding:14px 20px; border-radius:12px; background:rgba(10,12,18,0.85); border:1px solid rgba(0,240,255,0.22); backdrop-filter:blur(14px); font-size:14px; line-height:1.6; color:#e2e8f0; transition:border-color 0.3s ease; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
-          <div style="font-size:10px; font-weight:700; color:#00f0ff; letter-spacing:1px; margin-bottom:4px; text-transform:uppercase;">NEURAL SPEECH OUTPUT</div>
+        <!-- Live Subtitle / Voice Transcript Terminal (Monochrome) -->
+        <div id="jarvis-transcript-box" style="width:100%; max-width:620px; min-height:64px; padding:14px 20px; border-radius:12px; background:rgba(18,18,18,0.92); border:1px solid rgba(255,255,255,0.18); backdrop-filter:blur(14px); font-size:14px; line-height:1.6; color:#ffffff; transition:border-color 0.3s ease; box-shadow:0 10px 30px rgba(0,0,0,0.7);">
+          <div style="font-size:10px; font-weight:700; color:#a1a1aa; letter-spacing:1px; margin-bottom:4px; text-transform:uppercase;">NEURAL SPEECH OUTPUT</div>
           <div id="jarvis-dialogue-text" style="font-family:'Plus Jakarta Sans', sans-serif;">
             "Hello Mohan. I am KALKI. Sovereign AI systems are online. How may I assist you today?"
           </div>
         </div>
 
-        <!-- Bottom Glowing Mic Trigger Button & Language Toggle -->
+        <!-- Bottom Monochrome Mic Trigger Button & Language Toggle -->
         <div style="display:flex; flex-direction:column; align-items:center; margin-top:14px; gap:8px;">
           <!-- Mic Language Switcher (English / தமிழ்) -->
           <div style="display:flex; align-items:center; gap:8px;">
-            <button id="jarvis-lang-en" onclick="setJarvisMicLang('en-IN')" style="font-size:11px; font-weight:700; padding:4px 14px; border-radius:999px; background:rgba(0,240,255,0.18); border:1px solid #00f0ff; color:#00f0ff; cursor:pointer; transition:all 0.2s;">English 🇬🇧</button>
-            <button id="jarvis-lang-ta" onclick="setJarvisMicLang('ta-IN')" style="font-size:11px; font-weight:700; padding:4px 14px; border-radius:999px; background:transparent; border:1px solid rgba(255,255,255,0.2); color:#94a3b8; cursor:pointer; transition:all 0.2s;">தமிழ் 🇮🇳</button>
+            <button id="jarvis-lang-en" onclick="setJarvisMicLang('en-IN')" style="font-size:11px; font-weight:700; padding:4px 14px; border-radius:999px; background:rgba(255,255,255,0.16); border:1px solid #ffffff; color:#ffffff; cursor:pointer; transition:all 0.2s;">English 🇬🇧</button>
+            <button id="jarvis-lang-ta" onclick="setJarvisMicLang('ta-IN')" style="font-size:11px; font-weight:700; padding:4px 14px; border-radius:999px; background:transparent; border:1px solid rgba(255,255,255,0.2); color:#888888; cursor:pointer; transition:all 0.2s;">தமிழ் 🇮🇳</button>
           </div>
 
-          <button id="jarvis-agent-mic-btn" onclick="toggleJarvisVoiceInput()" class="jarvis-mic-trigger" title="Tap to Speak with KALKI" style="width:68px; height:68px; border-radius:50%; background:radial-gradient(circle, #0e121e 0%, #05070d 100%); border:2px solid #00f0ff; color:#00f0ff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 0 25px rgba(0,240,255,0.45), inset 0 0 15px rgba(0,240,255,0.2); transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
+          <button id="jarvis-agent-mic-btn" onclick="toggleJarvisVoiceInput()" class="jarvis-mic-trigger" title="Tap to Speak with KALKI" style="width:68px; height:68px; border-radius:50%; background:radial-gradient(circle, #222226 0%, #111113 100%); border:2px solid #ffffff; color:#ffffff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 0 25px rgba(255,255,255,0.2), inset 0 0 10px rgba(255,255,255,0.1); transition:all 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
             <svg id="jarvis-mic-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
           </button>
-          <div style="font-size:11px; font-weight:700; color:#00f0ff; letter-spacing:1.5px; text-transform:uppercase;" id="jarvis-mic-hint">
+          <div style="font-size:11px; font-weight:700; color:#ffffff; letter-spacing:1.5px; text-transform:uppercase;" id="jarvis-mic-hint">
             TAP MIC TO SPEAK
           </div>
         </div>
@@ -2687,21 +2737,22 @@ async function sendChatMessage() {
 
   // Connect directly to KALKI Sovereign Backend Core
   try {
-    updateAiChatBox(resId, 'Thinking deeply...', 'KALKI R1 Deep Thinker');
+    updateAiChatBox(resId, 'Thinking deeply...', 'KALKI Sovereign Intelligence');
     const resp = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: queryText,
         model: currentModel || 'deepseek/deepseek-r1',
-        history: chatHistory.slice(-10)
+        history: chatHistory.slice(-15)
       })
     });
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const data = await resp.json();
     fullReply = data.reply || data.response || data.text || '';
     if (fullReply) {
-      updateAiChatBox(resId, fullReply, data.engine || 'KALKI R1 Deep Thinker');
+      updateAiChatBox(resId, fullReply, data.engine || 'KALKI Sovereign Intelligence');
+      attachMobileActionCard(resId, queryText, fullReply);
     } else {
       throw new Error('Empty response from AI engine');
     }
@@ -2717,6 +2768,140 @@ async function sendChatMessage() {
 
   isStreaming = false;
   document.getElementById('chat-send-btn').disabled = false;
+}
+
+// ── Mobile Deep Launcher Integration ─────────────────────────────
+function triggerMobileCameraCapture() {
+  const camInput = document.getElementById('mobile-camera-input');
+  if (camInput) camInput.click();
+}
+
+function handleMobileCameraCapture(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    currentAttachment = {
+      name: file.name || 'camera_capture.jpg',
+      type: 'image',
+      dataUrl: e.target.result
+    };
+    renderAttachmentPreview();
+    showToast('Photo captured and attached ready to analyze');
+  };
+  reader.readAsDataURL(file);
+}
+
+function attachMobileActionCard(resId, query, reply) {
+  const q = (query || '').toLowerCase();
+  const r = (reply || '').toLowerCase();
+  const el = document.getElementById(resId);
+  if (!el) return;
+
+  const actions = [];
+
+  // 1. WhatsApp Intent (Natural English, Tamil, Tanglish)
+  if (q.includes('whatsapp') || q.includes('வாட்ஸ்அப்') || r.includes('whatsapp')) {
+    const phoneMatch = query.match(/(?:\+91|0)?[6-9]\d{9}/);
+    let waUrl = 'https://wa.me/';
+    if (phoneMatch) {
+      let num = phoneMatch[0].replace(/\D/g, '');
+      if (num.length === 10) num = '91' + num;
+      waUrl += num;
+    }
+    let msgText = '';
+    const colonSplit = query.split(/[:：]/);
+    if (colonSplit.length > 1) {
+      msgText = colonSplit.slice(1).join(':').trim();
+    }
+    if (msgText) {
+      waUrl += (waUrl.includes('?') ? '&' : '?') + 'text=' + encodeURIComponent(msgText);
+    }
+    actions.push({
+      label: phoneMatch ? `Send WhatsApp to ${phoneMatch[0]}` : 'Open WhatsApp Chat',
+      icon: '💬',
+      url: waUrl,
+      target: '_blank'
+    });
+  }
+
+  // 2. Phone Call Intent
+  if (q.includes('call') || q.includes('dial') || q.includes('கால்') || q.includes('போன் பண்ணு') || q.includes('பேசு')) {
+    const phoneMatch = query.match(/(?:\+91|0)?[6-9]\d{9}/);
+    if (phoneMatch) {
+      actions.push({
+        label: `Dial ${phoneMatch[0]}`,
+        icon: '📞',
+        url: `tel:${phoneMatch[0]}`
+      });
+    } else {
+      actions.push({
+        label: 'Open Phone Dialer',
+        icon: '📞',
+        url: 'tel:'
+      });
+    }
+  }
+
+  // 3. Email Intent
+  if (q.includes('mail') || q.includes('email') || q.includes('மெயில்') || q.includes('ஜிமெயில்')) {
+    const emailMatch = query.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+    let mailUrl = 'mailto:';
+    if (emailMatch) mailUrl += emailMatch[0];
+    actions.push({
+      label: emailMatch ? `Email ${emailMatch[0]}` : 'Compose Email',
+      icon: '✉️',
+      url: mailUrl
+    });
+  }
+
+  // 4. Camera Intent
+  if (q.includes('camera') || q.includes('photo') || q.includes('take photo') || q.includes('போட்டோ') || q.includes('கேமரா')) {
+    actions.push({
+      label: 'Open Camera',
+      icon: '📷',
+      action: 'triggerMobileCameraCapture()'
+    });
+  }
+
+  // 5. YouTube Intent
+  if (q.includes('youtube') || q.includes('யூடியூப்') || q.includes('பாட்டு') || q.includes('song') || q.includes('play')) {
+    let cleanQuery = query.replace(/open|play|on|youtube|யூடியூப்|போடு|பாட்டு/gi, '').trim();
+    let ytUrl = cleanQuery ? `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanQuery)}` : 'https://www.youtube.com';
+    actions.push({
+      label: 'Open YouTube',
+      icon: '▶️',
+      url: ytUrl,
+      target: '_blank'
+    });
+  }
+
+  // 6. Google Maps Intent
+  if (q.includes('map') || q.includes('location') || q.includes('direction') || q.includes('வழி') || q.includes('ரூட்') || q.includes('maps')) {
+    let locQuery = query.replace(/maps|map|location|direction|navigate|to|வழி|ரூட்|எப்படி போவது/gi, '').trim();
+    let mapUrl = locQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locQuery)}` : 'https://www.google.com/maps';
+    actions.push({
+      label: 'Open Google Maps',
+      icon: '📍',
+      url: mapUrl,
+      target: '_blank'
+    });
+  }
+
+  if (actions.length > 0) {
+    const card = document.createElement('div');
+    card.className = 'mobile-action-card';
+    card.innerHTML = `
+      <div class="mobile-action-card-header">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Instant Mobile Action
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        ${actions.map(a => a.url ? `<a href="${a.url}" ${a.target ? 'target="'+a.target+'"' : ''} class="mobile-action-btn">${a.icon} ${a.label}</a>` : `<button onclick="${a.action}" class="mobile-action-btn">${a.icon} ${a.label}</button>`).join('')}
+      </div>
+    `;
+    el.appendChild(card);
+  }
 }
 
 // ── Voice Integration ────────────────────────────────────────────
@@ -3719,14 +3904,14 @@ function setJarvisMicLang(lang) {
   const enBtn = document.getElementById('jarvis-lang-en');
   const taBtn = document.getElementById('jarvis-lang-ta');
   if (enBtn) {
-    enBtn.style.background = lang.startsWith('en') ? 'rgba(0,240,255,0.2)' : 'transparent';
-    enBtn.style.borderColor = lang.startsWith('en') ? '#00f0ff' : 'rgba(255,255,255,0.2)';
-    enBtn.style.color = lang.startsWith('en') ? '#00f0ff' : '#94a3b8';
+    enBtn.style.background = lang.startsWith('en') ? 'rgba(255,255,255,0.16)' : 'transparent';
+    enBtn.style.borderColor = lang.startsWith('en') ? '#ffffff' : 'rgba(255,255,255,0.2)';
+    enBtn.style.color = lang.startsWith('en') ? '#ffffff' : '#888888';
   }
   if (taBtn) {
-    taBtn.style.background = lang.startsWith('ta') ? 'rgba(0,240,255,0.2)' : 'transparent';
-    taBtn.style.borderColor = lang.startsWith('ta') ? '#00f0ff' : 'rgba(255,255,255,0.2)';
-    taBtn.style.color = lang.startsWith('ta') ? '#00f0ff' : '#94a3b8';
+    taBtn.style.background = lang.startsWith('ta') ? 'rgba(255,255,255,0.16)' : 'transparent';
+    taBtn.style.borderColor = lang.startsWith('ta') ? '#ffffff' : 'rgba(255,255,255,0.2)';
+    taBtn.style.color = lang.startsWith('ta') ? '#ffffff' : '#888888';
   }
   showToast(lang.startsWith('ta') ? 'மைக் மொழி: தமிழ் (Tamil) தேர்ந்தெடுக்கப்பட்டது' : 'Mic Language: English / Tanglish selected');
 }

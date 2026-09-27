@@ -131,7 +131,7 @@ async function runGemini(message, history = []) {
   contents.push({ role: "user", parts: [{ text: `[System Instructions: ${SYSTEM_PROMPT}]` }] });
   contents.push({ role: "model", parts: [{ text: "Understood. I will operate strictly as Kalki Sovereign AI OS." }] });
 
-  for (const item of history.slice(-8)) {
+  for (const item of history.slice(-15)) {
     const role = item.role === "assistant" ? "model" : "user";
     contents.push({ role, parts: [{ text: item.content }] });
   }
@@ -174,7 +174,7 @@ async function runOpenRouter(message, history = []) {
 
   const messages = [
     { role: "system", content: SYSTEM_PROMPT },
-    ...history.slice(-8).map(h => ({ role: h.role === "assistant" ? "assistant" : "user", content: h.content })),
+    ...history.slice(-15).map(h => ({ role: h.role === "assistant" ? "assistant" : "user", content: h.content })),
     { role: "user", content: message }
   ];
 
