@@ -122,7 +122,7 @@ const rawOpenRouter = process.env.OPENROUTER_API_KEY || _openRouterPool;
 // ENGINE PIPELINES (Strict Server-Side Key Access)
 // ====================================================================
 
-// 2. Gemini Pipeline (Primary Multilingual & Emotional Intelligence)
+// 1. Gemini Pipeline (Primary Multilingual & Emotional Intelligence)
 async function runGemini(message, history = []) {
   const apiKey = rawGemini;
   if (!apiKey) throw new Error("Server Gemini API key not configured");
@@ -137,20 +137,34 @@ async function runGemini(message, history = []) {
   }
   contents.push({ role: "user", parts: [{ text: message }] });
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ contents })
-  });
+  const geminiModels = ["gemini-flash-latest", "gemini-2.5-flash"];
+  let lastErr = null;
 
-  if (!response.ok) {
-    const errBody = await response.text();
-    throw new Error(`Gemini HTTP ${response.status}: ${errBody}`);
+  for (const gm of geminiModels) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${gm}:generateContent?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents })
+      });
+
+      if (!response.ok) {
+        const errBody = await response.text();
+        lastErr = new Error(`Gemini (${gm}) HTTP ${response.status}: ${errBody}`);
+        continue;
+      }
+      const data = await response.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (reply) {
+        return { text: reply, engine: "KALKI Sovereign Intelligence" };
+      }
+    } catch(e) {
+      lastErr = e;
+    }
   }
-  const data = await response.json();
-  const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  return { text: reply || "", engine: "KALKI Sovereign Intelligence" };
+
+  throw lastErr || new Error("All Gemini neural pipelines busy");
 }
 
 // 2. OpenRouter Pipeline (Multi-Model High Availability)
@@ -165,9 +179,10 @@ async function runOpenRouter(message, history = []) {
   ];
 
   const candidateModels = [
-    "qwen/qwen3.8-27b:free",
+    "google/gemma-4-31b-it:free",
     "google/gemma-4-26b-a4b-it:free",
-    "inclusionai/ling-3.0-flash-vl:free"
+    "qwen/qwen3.8-27b:free",
+    "nvidia/nemotron-3-super-120b-a12b:free"
   ];
 
   let lastErr = null;
